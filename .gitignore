@@ -1,5 +1,8 @@
-# Created by https://www.toptal.com/developers/gitignore/api/react,node,visualstudiocode,linux
-# Edit at https://www.toptal.com/developers/gitignore?templates=react,node,visualstudiocode,linux
+# Created by https://www.toptal.com/developers/gitignore/api/react,linux,visualstudiocode,sass,dotenv,node
+# Edit at https://www.toptal.com/developers/gitignore?templates=react,linux,visualstudiocode,sass,dotenv,node
+
+### dotenv ###
+.env
 
 ### Linux ###
 *~
@@ -92,7 +95,6 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -169,6 +171,12 @@ psd
 thumb
 sketch
 
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -188,4 +196,4 @@ sketch
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/react,node,visualstudiocode,linux
+# End of https://www.toptal.com/developers/gitignore/api/react,linux,visualstudiocode,sass,dotenv,node
