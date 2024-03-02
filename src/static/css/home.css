@@ -6,5 +6,9 @@ body .container-fluid section.border-home {
   margin: 3rem 5rem 0 5rem;
 }
 body .container-fluid section.border-home form input {
-  margin: 0 5rem 0 0;
+  margin: 0 15rem 0 0;
+}
+body .container-fluid button.button-home {
+  font-size: 14px;
+  width: 9.5rem;
 }/*# sourceMappingURL=home.css.map */

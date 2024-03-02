@@ -7,7 +7,7 @@ const FormAdd = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <div className="d-flex flex-row mb-3">
                         <Form.Control type="text" placeholder="Your Task" />
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" className='button-home'>
                             Submit
                         </Button>
                     </div>
