@@ -10,6 +10,7 @@ const Home = () => {
                 <section className="border rounded bg-dark border-home text-light">
                     <h1 className='text-center me-3 ms-3 mt-3 mb-3 fs-3 fw-bold shadow-lg'>To Do List</h1>
                     <FormAdd />
+                    <hr className='me-3 ms-3 mt-3 mb-3'/>
                 </section>
             </Container>
         </>
