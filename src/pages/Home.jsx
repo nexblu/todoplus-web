@@ -23,6 +23,11 @@ const Home = () => {
                         <div className="row justify-content-center">
                             <div className="col-md-4 mb-3 mt-3">
                                 <Button variant="primary" className='button-home'>
+                                    Clear All
+                                </Button>
+                            </div>
+                            <div className="col-md-4 mb-3 mt-3">
+                                <Button variant="primary" className='button-home'>
                                     Change Password
                                 </Button>
                             </div>
@@ -33,7 +38,6 @@ const Home = () => {
                             </div>
                         </div>
                     </Container>
-                    <hr className='me-3 ms-3 mb-3' />
                 </section>
             </Container>
         </>
