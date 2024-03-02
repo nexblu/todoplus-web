@@ -1,0 +1,14 @@
+body {
+    .container-fluid {
+        background-color: #FBFBFB;
+        min-height: 100vh;
+        section.border-home {
+            margin: 3rem 5rem 0 5rem;
+            form {
+                input {
+                    margin: 0 5rem 0 0;
+                }
+            }
+        }
+    }
+}
