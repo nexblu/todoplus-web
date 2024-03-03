@@ -1,5 +1,8 @@
 import { BrowserRouter as Routers, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
@@ -7,6 +10,9 @@ const App = () => {
       <Routers>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Routers>
     </>
