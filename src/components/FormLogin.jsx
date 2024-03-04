@@ -13,13 +13,15 @@ const FormLogin = () => {
 
     const successLogin = (text) => {
         toast.success(text, {
-            position: "bottom-right"
+            position: "bottom-right",
+            className: 'bg-dark'
         });
     };
 
     const errorLogin = (text) => {
         toast.error(text, {
-            position: "bottom-right"
+            position: "bottom-right",
+            className: 'bg-dark'
         });
     };
 
