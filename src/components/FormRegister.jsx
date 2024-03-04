@@ -80,7 +80,6 @@ const FormRegister = () => {
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <Form.Text className="text-danger">Password is required</Form.Text>}
                 </Form.Group>
-                <a href="/" className='text-light'>Forgot Password</a>
                 <Button variant="primary" className='mt-3' type='submit'>
                     Register
                 </Button>
