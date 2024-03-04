@@ -1,21 +1,77 @@
-import { Button, Form } from 'react-bootstrap'
+import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const FormLogin = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [usernameError, setUsernameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+
+    const successLogin = (text) => {
+        toast.success(text, {
+            position: "bottom-right"
+        });
+    };
+
+    const errorLogin = (text) => {
+        toast.error(text, {
+            position: "bottom-right"
+        });
+    };
+
+    const validationForm = () => {
+        let valid = true;
+
+        if (username === '') {
+            setUsernameError(true);
+            valid = false;
+        } else {
+            setUsernameError(false);
+        }
+
+        if (password === '') {
+            setPasswordError(true);
+            valid = false;
+        } else {
+            setPasswordError(false);
+        }
+
+        return valid;
+    }
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const isValid = validationForm();
+
+        if (isValid) {
+            successLogin('Success Login');
+        } else {
+            errorLogin('Failed Login');
+        }
+    }
+
     return (
         <>
-            <Form className='m-3 text-light'>
+            <Form className='m-3 text-light' onSubmit={handleRegister}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Username" />
+                    <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    {usernameError && <Form.Text className="text-danger">Username Is Required.</Form.Text>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    {passwordError && <Form.Text className="text-danger">Password Is Required.</Form.Text>}
                 </Form.Group>
                 <a href="/" className='text-light'>Forgot Password</a>
                 <Button variant="primary" type="submit" className='mt-3'>
                     Login
                 </Button>
+                <ToastContainer />
             </Form>
         </>
     );
