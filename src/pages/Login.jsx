@@ -16,7 +16,7 @@ const Login = () => {
                 <br />
                 <br />
                 <section className="border border-login rounded bg-dark mx-auto shadow-lg">
-                    <IconLoginRegis/>
+                    <IconLoginRegis />
                     <h1 className='text-light me-3 ms-3 mt-3 mb-3 text-center fw-bold title-login'>Welcome Back</h1>
                     <p className='me-3 ms-3 mt-3 mb-3 text-center description-login'>Please Enter Your Account Details</p>
                     <FormLogin />

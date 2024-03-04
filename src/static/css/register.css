@@ -11,6 +11,10 @@ body .container-fluid.register .border-register .border-img-register {
   text-align: center;
   background-color: #0B5ED7;
 }
+body .container-fluid.register .border-register .border-img-register img {
+  width: 20%;
+  height: 20%;
+}
 body .container-fluid.register .border-register h1.title-register {
   font-size: 25px;
 }

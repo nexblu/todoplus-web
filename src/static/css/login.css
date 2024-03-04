@@ -11,6 +11,10 @@ body .container-fluid.login .border-login .border-img-login {
   text-align: center;
   background-color: #0B5ED7;
 }
+body .container-fluid.login .border-login .border-img-login img {
+  width: 20%;
+  height: 20%;
+}
 body .container-fluid.login .border-login h1.title-login {
   font-size: 25px;
 }
