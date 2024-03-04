@@ -1,0 +1,72 @@
+body .container-fluid.login {
+  min-height: 100vh;
+  background-color: #FBFBFB;
+}
+body .container-fluid.login .border-login {
+  width: 26%;
+}
+body .container-fluid.login .border-login .border-img-login {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  background-color: #0B5ED7;
+}
+body .container-fluid.login .border-login h1.title-login {
+  font-size: 25px;
+}
+body .container-fluid.login .border-login p.description-login {
+  font-size: 14px;
+  color: grey;
+  text-decoration: none;
+}
+body .container-fluid.login .border-login form[class^=m] button.btn {
+  width: 100%;
+}
+body .container-fluid.login .border-login form[class^=m] a {
+  font-size: 14px;
+  color: none;
+  text-decoration: none;
+}
+body .container-fluid.login .border-login form[class^=m] [class^=mb] .form-label {
+  font-size: 14px;
+  color: none;
+  text-decoration: none;
+}
+body .container-fluid.login .border-login .footer-border-login p.p-1 {
+  font-size: 14px;
+  color: grey;
+  text-decoration: none;
+}
+body .container-fluid.login .border-login .footer-border-login p.p-1 a {
+  font-size: 14px;
+  color: #F8F9FA;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 1400px) {
+  body .container-fluid.login {
+    min-height: 100vh;
+    background-color: #FBFBFB;
+  }
+  body .container-fluid.login .border-login {
+    width: 35%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  body .container-fluid.login {
+    min-height: 100vh;
+    background-color: #FBFBFB;
+  }
+  body .container-fluid.login .border-login {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  body .container-fluid.login {
+    min-height: 100vh;
+    background-color: #FBFBFB;
+  }
+  body .container-fluid.login .border-login {
+    width: 100%;
+  }
+}/*# sourceMappingURL=login.css.map */

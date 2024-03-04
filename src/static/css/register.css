@@ -1,0 +1,72 @@
+body .container-fluid.register {
+  min-height: 100vh;
+  background-color: #FBFBFB;
+}
+body .container-fluid.register .border-register {
+  width: 26%;
+}
+body .container-fluid.register .border-register .border-img-register {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  background-color: #0B5ED7;
+}
+body .container-fluid.register .border-register h1.title-register {
+  font-size: 25px;
+}
+body .container-fluid.register .border-register p.description-register {
+  font-size: 14px;
+  color: grey;
+  text-decoration: none;
+}
+body .container-fluid.register .border-register form[class^=m] button.btn {
+  width: 100%;
+}
+body .container-fluid.register .border-register form[class^=m] a {
+  font-size: 14px;
+  color: none;
+  text-decoration: none;
+}
+body .container-fluid.register .border-register form[class^=m] [class^=mb] .form-label {
+  font-size: 14px;
+  color: none;
+  text-decoration: none;
+}
+body .container-fluid.register .border-register .footer-border-register p.p-1 {
+  font-size: 14px;
+  color: grey;
+  text-decoration: none;
+}
+body .container-fluid.register .border-register .footer-border-register p.p-1 a {
+  font-size: 14px;
+  color: #F8F9FA;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 1400px) {
+  body .container-fluid.register {
+    min-height: 100vh;
+    background-color: #FBFBFB;
+  }
+  body .container-fluid.register .border-register {
+    width: 35%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  body .container-fluid.register {
+    min-height: 100vh;
+    background-color: #FBFBFB;
+  }
+  body .container-fluid.register .border-register {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  body .container-fluid.register {
+    min-height: 100vh;
+    background-color: #FBFBFB;
+  }
+  body .container-fluid.register .border-register {
+    width: 100%;
+  }
+}/*# sourceMappingURL=register.css.map */

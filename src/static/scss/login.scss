@@ -1,0 +1,72 @@
+@mixin text-login ($font-size, $color) {
+    font-size: $font-size;
+    color: $color;
+    text-decoration: none;
+}
+
+@mixin border-responsive ($width) {
+    body {
+        .container-fluid.login {
+            min-height: 100vh;
+            background-color: #FBFBFB;
+            .border-login {
+                width: $width;
+            }
+        }
+    }
+}
+
+body {
+    .container-fluid.login {
+        min-height: 100vh;
+        background-color: #FBFBFB;
+        .border-login {
+            width: 26%;
+            .border-img-login {
+                width: 100%;
+                margin: auto;
+                text-align: center;
+                background-color: #0B5ED7;
+            }
+            h1.title-login {
+                font-size: 25px;
+            }
+            p.description-login {
+                @include text-login(14px, grey);
+            }
+            form[class^="m"] {
+                button.btn {
+                    width: 100%;
+                }
+                a {
+                    @include text-login(14px, none);
+                }
+                [class^="mb"] {
+                    .form-label {
+                        @include text-login(14px, none);
+                    }
+                }
+            }
+            .footer-border-login {
+                p.p-1 {
+                    @include text-login(14px, grey);
+                    a {
+                        @include text-login(14px, #F8F9FA);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    @include border-responsive(35%)
+}
+
+@media only screen and (max-width: 992px) {
+    @include border-responsive(50%)
+}
+
+@media only screen and (max-width: 576px) {
+    @include border-responsive(100%);
+}
