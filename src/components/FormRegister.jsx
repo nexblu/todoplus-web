@@ -68,12 +68,12 @@ const FormRegister = () => {
                 <Form.Group className="mb-3">
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control type="text" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    {emailError && <Form.Text className="text-danger">Email is required</Form.Text>}
+                    {emailError && <Form.Text className="text-danger">Email Is Required.</Form.Text>}
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Username</Form.Label>
                     <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                    {usernameError && <Form.Text className="text-danger">Username is required</Form.Text>}
+                    {usernameError && <Form.Text className="text-danger">Username Is Required.</Form.Text>}
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
