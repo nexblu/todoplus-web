@@ -1,4 +1,4 @@
-import '../static/css/home_1.css'
+import '../static/css/home.css'
 import { Container } from 'react-bootstrap'
 import { Helmet } from "react-helmet";
 import { IoExit } from "react-icons/io5";
