@@ -1,7 +1,9 @@
 import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react';
 
-const ResponsivePlacerholder = () => {
+const ResponsivePlacerholder = (prop) => {
+    let {task, setTask} = prop;
+
     const [placeholder, setPlaceholder] = useState('Write Your New Task');
 
     useEffect(() => {
@@ -21,7 +23,7 @@ const ResponsivePlacerholder = () => {
 
     return (
         <>
-            <Form.Control type="text" placeholder={placeholder} className='task-input' />
+            <Form.Control type="text" placeholder={placeholder} className='task-input' value={task} onChange={(e) => setTask(e.target.value)}/>
         </>
     )
 }
