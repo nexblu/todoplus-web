@@ -44,7 +44,7 @@ const Home = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <FormAdd />
+                                <FormAdd/>
                             </section>
                         </div>
                     </div>
