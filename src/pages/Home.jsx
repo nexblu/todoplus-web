@@ -1,8 +1,10 @@
-import '../static/css/home.css'
+import '../static/css/home_1.css'
 import { Container, Button } from 'react-bootstrap'
-import FormAdd from '../components/FormAdd'
 import { Helmet } from "react-helmet";
-import TodoList from '../components/TodoList';
+import { IoExit } from "react-icons/io5";
+import { FaRegSun } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import ResponsivePlacerholder from '../components/ResponsivePlaceholder';
 
 const Home = () => {
     return (
@@ -11,34 +13,59 @@ const Home = () => {
                 <meta charSet="utf-8" />
                 <title>Home</title>
             </Helmet>
-            <Container fluid className='home'>
+            <Container fluid className='container-home'>
                 <br />
-                <section className="border rounded bg-dark border-home text-light">
-                    <h1 className='text-center me-3 ms-3 mt-3 mb-3 fs-3 fw-bold shadow-lg'>To Do List</h1>
-                    <FormAdd />
-                    <hr className='me-3 ms-3 mb-3' />
-                    <TodoList />
-                    <hr className='me-3 ms-3 mb-3' />
-                    <Container className='text-center mb-3'>
-                        <div className="row justify-content-center">
-                            <div className="col-md-4 mb-3 mt-3">
-                                <Button variant="primary" className='button-home'>
-                                    Clear All
-                                </Button>
-                            </div>
-                            <div className="col-md-4 mb-3 mt-3">
-                                <Button variant="primary" className='button-home'>
-                                    Change Password
-                                </Button>
-                            </div>
-                            <div className="col-md-4 mt-3">
-                                <Button variant="primary" className='button-home'>
-                                    Logout
-                                </Button>
-                            </div>
+                <br />
+                <br />
+                <section className="border rounded bg-dark text-light shadow-lg text-center border-home mx-auto">
+                    <div className="row justify-content-between m-3">
+                        <div className="col-4">
+                            <p className='fw-bold'>TODOPLUS</p>
                         </div>
-                    </Container>
+                        <div className="col-4">
+                            <FaRegSun />
+                        </div>
+                        <div className="col-4">
+                            <IoExit />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <section className="border border-home-task m-3 mx-auto">
+                                <div className="row justify-content-between m-3">
+                                    <div className="col-md-4 mt-3">
+                                        <h2 className='fw-bold'>Todo Done</h2>
+                                        <p>Keep It Up</p>
+                                    </div>
+                                    <div className="col-md-4 pt-1">
+                                        <div className="border rounded-circle mx-auto count-task border-0">
+                                            <h1 className='pt-4'>1/3</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div className="d-flex justify-content-between mb-2 task-area">
+                                    <div className="pe-2 ps-2 pt-3 area-input border mx-auto">
+                                        <ResponsivePlacerholder />
+                                    </div>
+                                    <div className="pe-2 ps-2 mx-auto">
+                                        <div className="border rounded-circle btn-add-task pt-2">
+                                            <FaPlus />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="d-flex flex-row mb-3">
+                                    <div className="p-2">
+                                        <Button variant="primary" className='btn-576'>Primary</Button>{' '}
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
                 </section>
+                <br />
+                <br />
             </Container>
         </>
     )

@@ -1,14 +1,43 @@
-body .container-fluid.home {
-  background-color: #FBFBFB;
+body .container-fluid.container-home {
   min-height: 100vh;
+  background-color: #FBFBFB;
 }
-body .container-fluid.home section.border-home {
-  margin: 3rem 5rem 0 5rem;
+body .container-fluid.container-home .border-home {
+  width: 90%;
 }
-body .container-fluid.home section.border-home form input {
-  margin: 0 15rem 0 0;
+body .container-fluid.container-home .border-home .row .col .border-home-task {
+  width: 70%;
 }
-body .container-fluid.home button.button-home {
-  font-size: 14px;
-  width: 9.5rem;
-}/*# sourceMappingURL=home.css.map */
+body .container-fluid.container-home .border-home .row .col .border-home-task .row [class^=col] .count-task {
+  width: 100px;
+  height: 100px;
+  background-color: #0B5ED7;
+}
+body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p].area-input {
+  width: 800px;
+}
+body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p] {
+  padding-top: 10px;
+}
+body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p] .btn-add-task {
+  width: 50px;
+  height: 50px;
+  background-color: #0B5ED7;
+}
+
+@media only screen and (min-width: 576px) {
+  [class^=d] [class^=p] .btn-576 {
+    display: none;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .task-area [class^=p].area-input .task-input {
+    width: 100%;
+  }
+  .task-area [class^=p] .btn-add-task {
+    display: none;
+  }
+  div[class^=d] div[class^=p] .btn-576 {
+    display: block;
+  }
+}/*# sourceMappingURL=home_1.css.map */
