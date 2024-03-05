@@ -64,6 +64,8 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
+                <br />
+                <br />
             </Container>
         </>
     )
