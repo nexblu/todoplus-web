@@ -1,18 +1,25 @@
-import { Button, Form } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { FaPlus } from "react-icons/fa";
+import ResponsivePlacerholder from './ResponsivePlaceholder';
 
 const FormAdd = () => {
     return (
         <>
-            <Form className='me-3 ms-3 mt-3 mb-3'>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <div className="d-flex flex-row mb-3">
-                        <Form.Control type="text" placeholder="Your Task" />
-                        <Button variant="primary" className='button-home'>
-                            Submit
-                        </Button>
+            <div className="d-flex justify-content-between mb-2 task-area">
+                <div className="pe-2 ps-2 pt-3 area-input border mx-auto">
+                    <ResponsivePlacerholder />
+                </div>
+                <div className="pe-2 ps-2 mx-auto">
+                    <div className="border rounded-circle btn-add-task pt-2">
+                        <FaPlus />
                     </div>
-                </Form.Group>
-            </Form>
+                </div>
+            </div>
+            <div className="d-flex flex-row mb-3">
+                <div className="p-2">
+                    <Button variant="primary" className='btn-576'>Primary</Button>{' '}
+                </div>
+            </div>
         </>
     )
 }

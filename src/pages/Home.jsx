@@ -1,10 +1,9 @@
 import '../static/css/home_1.css'
-import { Container, Button } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { Helmet } from "react-helmet";
 import { IoExit } from "react-icons/io5";
 import { FaRegSun } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
-import ResponsivePlacerholder from '../components/ResponsivePlaceholder';
+import FormAdd from '../components/FormAdd';
 
 const Home = () => {
     return (
@@ -45,21 +44,7 @@ const Home = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <div className="d-flex justify-content-between mb-2 task-area">
-                                    <div className="pe-2 ps-2 pt-3 area-input border mx-auto">
-                                        <ResponsivePlacerholder />
-                                    </div>
-                                    <div className="pe-2 ps-2 mx-auto">
-                                        <div className="border rounded-circle btn-add-task pt-2">
-                                            <FaPlus />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="d-flex flex-row mb-3">
-                                    <div className="p-2">
-                                        <Button variant="primary" className='btn-576'>Primary</Button>{' '}
-                                    </div>
-                                </div>
+                                <FormAdd />
                             </section>
                         </div>
                     </div>
