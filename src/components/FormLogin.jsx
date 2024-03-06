@@ -1,22 +1,30 @@
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const FormLogin = () => {
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
-    const successLogin = (text) => {
-        toast.success(text, {
-            position: "bottom-right",
-            className: 'bg-dark'
-        });
-    };
+    const userLogin = async (username, password) => {
+        const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
+        const data = await response.json();
+        return data;
+    }
+
+    const clearForm = async () => {
+        setUsername('');
+        setPassword('');
+    }
 
     const errorLogin = (text) => {
         toast.error(text, {
@@ -48,11 +56,24 @@ const FormLogin = () => {
     const handleRegister = (e) => {
         e.preventDefault();
         const isValid = validationForm();
-
         if (isValid) {
-            successLogin('Success Login');
+            userLogin(username, password)
+                .then(data => {
+                    if (data['status_code'] === 200) {
+                        const token = data['result']['token'];
+                        Cookies.set('access_token', token);
+                        navigate('/')
+                        clearForm()
+                    } else {
+                        errorLogin('Failed Login.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan:', error);
+                    errorLogin('Failed Login.');
+                });
         } else {
-            errorLogin('Failed Login');
+            errorLogin('Failed Login.');
         }
     }
 
@@ -61,7 +82,7 @@ const FormLogin = () => {
             <Form className='m-3 text-light' onSubmit={handleRegister}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                     {usernameError && <Form.Text className="text-danger">Username Is Required.</Form.Text>}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
