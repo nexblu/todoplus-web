@@ -11,11 +11,15 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            navigate('/')
+        try {
+            const accessToken = Cookies.get('access_token');
+            if (accessToken) {
+                navigate('/')
+            }
+        } catch (error) {
+            // error
         }
-    },);
+    }, [navigate]);
 
     return (
         <>
