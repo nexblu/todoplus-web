@@ -15,9 +15,13 @@ const FormLogin = () => {
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const userLogin = async (username, password) => {
+        setLoading(true); 
         const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
+        setLoading(false);
         return data;
     }
 
@@ -91,8 +95,8 @@ const FormLogin = () => {
                     {passwordError && <Form.Text className="text-danger">Password Is Required.</Form.Text>}
                 </Form.Group>
                 <a href="/" className='text-light'>Forgot Password</a>
-                <Button variant="primary" type="submit" className='mt-3'>
-                    Login
+                <Button variant="primary" type="submit" className='mt-3' disabled={loading}>
+                    {loading ? 'Loading...' : 'Login'}
                 </Button>
                 <ToastContainer />
             </Form>
