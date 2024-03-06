@@ -1,13 +1,25 @@
-import { Button, Form } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
 import { FaPlus } from "react-icons/fa";
-import ResponsivePlacerholder from './ResponsivePlaceholder';
-import { useState } from 'react';
-import todo from '../todo';
+import ResponsivePlaceholder from './ResponsivePlaceholder';
+import Cookies from 'js-cookie';
+import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { jwtDecode } from 'jwt-decode';
 
 const FormAdd = () => {
     const [task, setTask] = useState('');
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const accessToken = Cookies.get('access_token');
+        const decodedToken = jwtDecode(accessToken);
+        setUser(decodedToken)
+    }, []);
+
+    const clearForm = async () => {
+        setTask('');
+    }
 
     const successAdd = (text) => {
         toast.success(text, {
@@ -23,12 +35,41 @@ const FormAdd = () => {
         });
     };
 
-    const handleTask = (e) => {
+    const userAddTodo = async (username, task) => {
+        try {
+            const data = {
+                username: username,
+                task: task,
+            };
+            const response = await fetch('http://localhost:5000/todoplus/v1/todolist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const resp = await response.json();
+            if (resp['status_code'] === 201) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error('Terjadi kesalahan:', error);
+            return false;
+        }
+    };
+
+    const handleTask = async (e) => {
         e.preventDefault();
-        console.log('klik')
         if (task !== '') {
-            todo.push(task);
-            successAdd('Success Add Todo.');
+            const result = await userAddTodo(user['username'], task);
+            if (result) {
+                clearForm();
+                successAdd('Success Add Todo.');
+            } else {
+                errorAdd('Failed Add Todo.');
+            }
         } else {
             errorAdd('Failed Add Todo.');
         }
@@ -38,7 +79,7 @@ const FormAdd = () => {
         <>
             <div className="d-flex justify-content-between mb-2 task-area">
                 <div className="pe-2 ps-2 pt-3 area-input border mx-auto">
-                    <ResponsivePlacerholder task={task} setTask={setTask} />
+                    <ResponsivePlaceholder task={task} setTask={setTask} />
                 </div>
                 <div className="pe-2 ps-2 mx-auto">
                     <Form onSubmit={handleTask}>
