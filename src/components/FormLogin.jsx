@@ -18,10 +18,8 @@ const FormLogin = () => {
     const [loading, setLoading] = useState(false);
 
     const userLogin = async (username, password) => {
-        setLoading(true); 
         const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
-        setLoading(false);
         return data;
     }
 
@@ -59,6 +57,7 @@ const FormLogin = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
+        setLoading(true); 
         const isValid = validationForm();
         if (isValid) {
             userLogin(username, password)
@@ -68,15 +67,18 @@ const FormLogin = () => {
                         Cookies.set('access_token', token);
                         navigate('/')
                         clearForm()
+                        setLoading(false);
                     } else {
+                        setLoading(false);
                         errorLogin('Failed Login.');
                     }
                 })
                 .catch(error => {
-                    console.error('Ada kesalahan:', error);
+                    setLoading(false);
                     errorLogin('Failed Login.');
                 });
         } else {
+            setLoading(false);
             errorLogin('Failed Login.');
         }
     }

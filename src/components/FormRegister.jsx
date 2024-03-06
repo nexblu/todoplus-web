@@ -16,6 +16,8 @@ const FormRegister = () => {
     const [messageUsernameError, setMessageUsernameError] = useState('');
     const [messagePasswordError, setMessagePasswordError] = useState('');
 
+    const [loading, setLoading] = useState(false);
+
     const userLogin = async (username, password) => {
         const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
@@ -123,6 +125,7 @@ const FormRegister = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const isValid = await validationForm();
 
         if (isValid) {
@@ -133,11 +136,14 @@ const FormRegister = () => {
                 if (register) {
                     successRegis('Success Register.');
                     clearForm();
+                    setLoading(false)
                 } else {
                     errorRegis('Failed Register.');
+                    setLoading(false)
                 }
             } else {
                 errorRegis('Failed Register.');
+                setLoading(false)
             }
         }
     }
@@ -160,8 +166,8 @@ const FormRegister = () => {
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <Form.Text className="text-danger">{messagePasswordError}</Form.Text>}
                 </Form.Group>
-                <Button variant="primary" className='mt-3' type='submit'>
-                    Register
+                <Button variant="primary" className='mt-3' type='submit' disabled={loading}>
+                {loading ? 'Loading...' : 'Register'}
                 </Button>
                 <ToastContainer />
             </Form>
