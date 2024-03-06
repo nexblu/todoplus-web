@@ -12,9 +12,13 @@ const FormAdd = () => {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        const decodedToken = jwtDecode(accessToken);
-        setUser(decodedToken)
+        try {
+            const accessToken = Cookies.get('access_token');
+            const decodedToken = jwtDecode(accessToken);
+            setUser(decodedToken)
+        } catch (error) {
+            console.error('Error decoding token:', error.message);
+        }
     }, []);
 
     const clearForm = async () => {

@@ -4,8 +4,20 @@ import { Helmet } from "react-helmet";
 import { IoExit } from "react-icons/io5";
 import { FaRegSun } from "react-icons/fa";
 import FormAdd from '../components/FormAdd';
+import Cookies from 'js-cookie';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const accessToken = Cookies.get('access_token');
+        if (!accessToken) {
+            navigate('/login')
+        }
+    },);
+
     return (
         <>
             <Helmet>
