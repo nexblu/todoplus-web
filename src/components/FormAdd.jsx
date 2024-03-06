@@ -7,19 +7,30 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { jwtDecode } from 'jwt-decode';
 
-const FormAdd = () => {
+const FormAdd = (prop) => {
+    let { list, setList } = prop
     const [task, setTask] = useState('');
     const [user, setUser] = useState({});
+    const [createdAt, setCreatedAt] = useState({});
 
     useEffect(() => {
         try {
             const accessToken = Cookies.get('access_token');
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken)
+            const getTodo = async () => {
+                const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/${decodedToken['username']}`)
+                response.json().then(json => {
+                    console.log(json[0]['result'])
+                    setList(json[0]['result'])
+                })
+            }
+
+            getTodo()
         } catch (error) {
             // error
         }
-    }, []);
+    }, [setUser, setList]);
 
     const clearForm = async () => {
         setTask('');
@@ -41,9 +52,13 @@ const FormAdd = () => {
 
     const userAddTodo = async (username, task) => {
         try {
+            const currentUTCTimestampInSeconds = Math.floor(new Date().getTime() / 1000);
+            setCreatedAt(currentUTCTimestampInSeconds)
             const data = {
                 username: username,
                 task: task,
+                created_at: currentUTCTimestampInSeconds,
+                is_done: false
             };
             const response = await fetch('http://localhost:5000/todoplus/v1/todolist', {
                 method: 'POST',
@@ -69,6 +84,13 @@ const FormAdd = () => {
         if (task !== '') {
             const result = await userAddTodo(user['username'], task);
             if (result) {
+                const newList = [...list, {
+                    username: user['username'],
+                    task: task,
+                    created_at: createdAt,
+                    is_done: false
+                }];
+                setList(newList)
                 clearForm();
                 successAdd('Success Add Todo.');
             } else {

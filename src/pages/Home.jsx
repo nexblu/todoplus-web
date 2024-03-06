@@ -5,11 +5,13 @@ import { IoExit } from "react-icons/io5";
 import { FaRegSun } from "react-icons/fa";
 import FormAdd from '../components/FormAdd';
 import Cookies from 'js-cookie';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TodoList from '../components/TodoList';
 
 const Home = () => {
     const navigate = useNavigate();
+    const [list, setList] = useState([]);
 
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
@@ -56,7 +58,10 @@ const Home = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <FormAdd/>
+                                <FormAdd list={list} setList={setList}/>
+                            </section>
+                            <section className="border">
+                                <TodoList list={list} setList={setList}/>
                             </section>
                         </div>
                     </div>
