@@ -3,8 +3,20 @@ import { Helmet } from "react-helmet";
 import FormRegister from '../components/FormRegister';
 import IconLoginRegis from '../components/IconLoginRegis';
 import '../static/css/register.css'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const Register = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const accessToken = Cookies.get('access_token');
+        if (accessToken) {
+            navigate('/')
+        }
+    },);
+
     return (
         <>
             <Helmet>
