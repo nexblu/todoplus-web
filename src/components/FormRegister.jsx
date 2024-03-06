@@ -29,18 +29,18 @@ const FormRegister = () => {
                 email: email,
                 password: password
             };
-            const response = fetch('http://localhost:5000/todoplus/v1/register', {
+            const response = await fetch('http://localhost:5000/todoplus/v1/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            })
+            });
             const resp = await response.json();
+            console.table(resp)
             if (resp['status_code'] === 201) {
                 return true;
             } else {
-                console.log(data['status_code']);
                 return false;
             }
         } catch (error) {
@@ -126,9 +126,10 @@ const FormRegister = () => {
         const isValid = await validationForm();
 
         if (isValid) {
-            const login = userLogin(username, password)
-            if (login['status_code'] === 200) {
-                const register = userRegister(email, username, password);
+            const login = await userLogin(username, password);
+            if (login['status_code'] === 404) {
+                const register = await userRegister(email, username, password);
+                console.log(register);
                 if (register) {
                     successRegis('Success Register.');
                     clearForm();
