@@ -17,7 +17,7 @@ const FormAdd = () => {
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken)
         } catch (error) {
-            console.error('Error decoding token:', error.message);
+            // error
         }
     }, []);
 
