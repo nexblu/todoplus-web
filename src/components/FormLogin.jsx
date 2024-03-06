@@ -74,6 +74,7 @@ const FormLogin = () => {
                     }
                 })
                 .catch(error => {
+                    console.error('An error occurred:', error);
                     setLoading(false);
                     errorLogin('Failed Login.');
                 });
