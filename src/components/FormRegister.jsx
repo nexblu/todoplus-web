@@ -16,6 +16,39 @@ const FormRegister = () => {
     const [messageUsernameError, setMessageUsernameError] = useState('');
     const [messagePasswordError, setMessagePasswordError] = useState('');
 
+    const userLogin = async (username, password) => {
+        const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
+        const data = await response.json();
+        return data;
+    }
+
+    const userRegister = async (email, username, password) => {
+        try {
+            const data = {
+                username: username,
+                email: email,
+                password: password
+            };
+            const response = fetch('http://localhost:5000/todoplus/v1/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            const resp = await response.json();
+            if (resp['status_code'] === 201) {
+                return true;
+            } else {
+                console.log(data['status_code']);
+                return false;
+            }
+        } catch (error) {
+            console.error('Terjadi kesalahan:', error);
+            return false;
+        }
+    }
+
     const validateEmail = async (email) => {
         try {
             const response = await fetch(`http://localhost:5000/todoplus/v1/email/${email}`);
@@ -23,7 +56,6 @@ const FormRegister = () => {
             if (data['status_code'] === 200) {
                 return true;
             } else {
-                console.log(data['status_code']);
                 return false;
             }
         } catch (error) {
@@ -38,14 +70,14 @@ const FormRegister = () => {
         setPassword('');
     }
 
-    const successRegis = (text) => {
+    const successRegis = async (text) => {
         toast.success(text, {
             position: "bottom-right",
             className: 'bg-dark'
         });
     };
 
-    const errorRegis = (text) => {
+    const errorRegis = async (text) => {
         toast.error(text, {
             position: "bottom-right",
             className: 'bg-dark'
@@ -94,10 +126,18 @@ const FormRegister = () => {
         const isValid = await validationForm();
 
         if (isValid) {
-            successRegis('Success Register');
-            clearForm();
-        } else {
-            errorRegis('Failed Register');
+            const login = userLogin(username, password)
+            if (login['status_code'] === 200) {
+                const register = userRegister(email, username, password);
+                if (register) {
+                    successRegis('Success Register.');
+                    clearForm();
+                } else {
+                    errorRegis('Failed Register.');
+                }
+            } else {
+                errorRegis('Failed Register.');
+            }
         }
     }
 
