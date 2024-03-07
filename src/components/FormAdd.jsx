@@ -104,12 +104,12 @@ const FormAdd = (prop) => {
     return (
         <>
             <div className="d-flex justify-content-between mb-2 task-area">
-                <div className="pe-2 ps-2 pt-3 area-input border mx-auto">
+                <div className="pe-2 ps-2 pt-3 area-input border mx-auto border-0">
                     <ResponsivePlaceholder task={task} setTask={setTask} />
                 </div>
                 <div className="pe-2 ps-2 mx-auto">
                     <Form onSubmit={handleTask}>
-                        <div className="border rounded-circle btn-add-task pt-2" onClick={handleTask}>
+                        <div className="border rounded-circle btn-add-task pt-2 border-0" onClick={handleTask}>
                             <FaPlus />
                         </div>
                     </Form>

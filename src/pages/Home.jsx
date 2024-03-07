@@ -44,8 +44,8 @@ const Home = () => {
                     </div>
                     <div className="row">
                         <div className="col">
-                            <section className="border border-home-task m-3 mx-auto">
-                                <div className="row justify-content-between m-3">
+                            <section className="border border-home-task m-3 mx-auto border-0">
+                                <div className="row justify-content-between border rounded border-0">
                                     <div className="col-md-4 mt-3">
                                         <h2 className='fw-bold'>Todo Done</h2>
                                         <p>Keep It Up</p>
@@ -58,10 +58,10 @@ const Home = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <FormAdd list={list} setList={setList}/>
+                                <FormAdd list={list} setList={setList} />
                             </section>
-                            <section className="border">
-                                <TodoList list={list} setList={setList}/>
+                            <section className="border border-todo-list-item mx-auto m-3 border-0">
+                                <TodoList list={list} setList={setList} />
                             </section>
                         </div>
                     </div>
