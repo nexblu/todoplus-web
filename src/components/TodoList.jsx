@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Spinner } from 'react-bootstrap'; // tambahkan Spinner dari react-bootstrap
+import { Form, Spinner } from 'react-bootstrap';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
