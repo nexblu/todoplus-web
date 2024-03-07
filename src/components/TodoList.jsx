@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
+import Todo from './Todo';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
@@ -45,14 +46,7 @@ const TodoList = (prop) => {
                 </Spinner>
             ) : (
                 <ul>
-                    {list.map((todo) => (
-                        <li key={todo.id} className='border m-2 rounded li-todo-list-item border-0 mb-3'>
-                            <div className="d-flex flex-row flex-todo-list-item">
-                                <Form.Check aria-label="option 1" className='btn-is-done' />
-                                <p className='ms-3'>{todo.task}</p>
-                            </div>
-                        </li>
-                    ))}
+                    <Todo list={list} />
                 </ul>
             )}
         </>
