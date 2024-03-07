@@ -1,9 +1,11 @@
-import { Form } from 'react-bootstrap';
-import { useState } from "react";
+import { useState } from 'react';
+import { Form, Pagination } from 'react-bootstrap';
 
 const Todo = (prop) => {
     const { list, setList } = prop;
     const [updatedList, setUpdatedList] = useState(list);
+    const [currentPage, setCurrentPage] = useState(1);
+    const tasksPerPage = 5;
 
     const handleCheckboxChange = (todoId) => {
         const newList = updatedList.map(item => {
@@ -16,9 +18,15 @@ const Todo = (prop) => {
         setList(newList);
     };
 
+    const indexOfLastTask = currentPage * tasksPerPage;
+    const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+    const currentTasks = updatedList.slice(indexOfFirstTask, indexOfLastTask);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <>
-            {updatedList.map((todo) => (
+            {currentTasks.map((todo) => (
                 <li key={todo.id} className='border m-2 rounded li-todo-list-item border-0 mb-3'>
                     <div className="d-flex flex-row flex-todo-list-item">
                         <Form.Check 
@@ -31,6 +39,13 @@ const Todo = (prop) => {
                     </div>
                 </li>
             ))}
+            <Pagination>
+                {Array.from({ length: Math.ceil(updatedList.length / tasksPerPage) }, (_, i) => (
+                    <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => paginate(i + 1)}>
+                        {i + 1}
+                    </Pagination.Item>
+                ))}
+            </Pagination>
         </>
     );
 };
