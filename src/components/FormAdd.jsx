@@ -10,27 +10,18 @@ import { jwtDecode } from 'jwt-decode';
 const FormAdd = (prop) => {
     let { list, setList } = prop
     const [task, setTask] = useState('');
+    const [createdAt, setCreatedAt] = useState(0);
     const [user, setUser] = useState({});
-    const [createdAt, setCreatedAt] = useState({});
 
     useEffect(() => {
         try {
             const accessToken = Cookies.get('access_token');
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken)
-            const getTodo = async () => {
-                const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/${decodedToken['username']}`)
-                response.json().then(json => {
-                    console.log(json[0]['result'])
-                    setList(json[0]['result'])
-                })
-            }
-
-            getTodo()
         } catch (error) {
             // error
         }
-    }, [setUser, setList]);
+    }, [setUser]);
 
     const clearForm = async () => {
         setTask('');
