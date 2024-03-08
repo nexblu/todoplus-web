@@ -53,7 +53,7 @@ const Home = () => {
                                     </div>
                                     <div className="col-md-4 pt-1">
                                         <div className="border rounded-circle mx-auto count-task border-0">
-                                            <CountTodo />
+                                            <CountTodo list={list} />
                                         </div>
                                     </div>
                                 </div>
