@@ -5,7 +5,7 @@ const Todo = (prop) => {
     const { list, setList } = prop;
     const [updatedList, setUpdatedList] = useState(list);
     const [currentPage, setCurrentPage] = useState(1);
-    const tasksPerPage = 5;
+    const tasksPerPage = 10;
 
     useEffect(() => {
         setUpdatedList(list);
