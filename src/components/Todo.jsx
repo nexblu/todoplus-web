@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Pagination } from 'react-bootstrap';
 
 const Todo = (prop) => {
@@ -6,6 +6,10 @@ const Todo = (prop) => {
     const [updatedList, setUpdatedList] = useState(list);
     const [currentPage, setCurrentPage] = useState(1);
     const tasksPerPage = 5;
+
+    useEffect(() => {
+        setUpdatedList(list);
+    }, [list]);
 
     const handleCheckboxChange = (todoId) => {
         const newList = updatedList.map(item => {
