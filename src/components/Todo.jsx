@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Form, Pagination } from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap';
+import IsDone from './IsDone';
 
 const Todo = (prop) => {
     const { list, setList } = prop;
@@ -43,12 +44,7 @@ const Todo = (prop) => {
             {currentTasks.map((todo) => (
                 <li key={todo.id} className='border m-2 rounded li-todo-list-item border-0 mb-3'>
                     <div className="d-flex flex-row flex-todo-list-item">
-                        <Form.Check
-                            aria-label="option 1"
-                            className='btn-is-done'
-                            checked={todo.is_done}
-                            onChange={() => handleCheckboxChange(todo.id)}
-                        />
+                        <IsDone todo={todo} handleCheckboxChange={handleCheckboxChange}/>
                         <p className={`ms-3 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>{todo.task}</p>
                     </div>
                 </li>
