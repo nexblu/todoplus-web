@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 const CountTodo = (prop) => {
     const { list } = prop;
-    const [lenTodo, setLenTodo] = useState(0);
+    const [countTodo, setCountTodo] = useState([]);
 
     useEffect(() => {
         const calculateTodo = async () => {
             let isDone = 0;
             for (var item of list) {
-                if (item) {
+                if (item['is_done']) {
                     isDone = isDone + 1;
                 }
             }
@@ -16,13 +16,13 @@ const CountTodo = (prop) => {
         };
 
         calculateTodo().then(result => {
-            setLenTodo(result);
+            setCountTodo([result, list.length]);
         });
     }, [list]);
 
     return (
         <>
-            <h1 className='pt-4'>{lenTodo}</h1>
+            <h1 className='pt-4'>{`${countTodo[0]}/${countTodo[1]}`}</h1>
         </>
     );
 };
