@@ -22,15 +22,25 @@ const Todo = (prop) => {
     const indexOfFirstTask = indexOfLastTask - tasksPerPage;
     const currentTasks = updatedList.slice(indexOfFirstTask, indexOfLastTask);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const nextPage = () => {
+        if (indexOfLastTask < updatedList.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     return (
         <>
             {currentTasks.map((todo) => (
                 <li key={todo.id} className='border m-2 rounded li-todo-list-item border-0 mb-3'>
                     <div className="d-flex flex-row flex-todo-list-item">
-                        <Form.Check 
-                            aria-label="option 1" 
+                        <Form.Check
+                            aria-label="option 1"
                             className='btn-is-done'
                             checked={todo.is_done}
                             onChange={() => handleCheckboxChange(todo.id)}
@@ -39,12 +49,10 @@ const Todo = (prop) => {
                     </div>
                 </li>
             ))}
-            <Pagination>
-                {Array.from({ length: Math.ceil(updatedList.length / tasksPerPage) }, (_, i) => (
-                    <Pagination.Item key={i + 1} active={i + 1 === currentPage} onClick={() => paginate(i + 1)}>
-                        {i + 1}
-                    </Pagination.Item>
-                ))}
+            <Pagination className="justify-content-center">
+                <Pagination.Prev onClick={prevPage} disabled={currentPage === 1} />
+                <Pagination.Item active>{currentPage}</Pagination.Item>
+                <Pagination.Next onClick={nextPage} disabled={indexOfLastTask >= updatedList.length} />
             </Pagination>
         </>
     );
