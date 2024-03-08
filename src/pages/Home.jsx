@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TodoList from '../components/TodoList';
+import CountTodo from '../components/CountTodo';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -52,13 +53,13 @@ const Home = () => {
                                     </div>
                                     <div className="col-md-4 pt-1">
                                         <div className="border rounded-circle mx-auto count-task border-0">
-                                            <h1 className='pt-4'>1/3</h1>
+                                            <CountTodo />
                                         </div>
                                     </div>
                                 </div>
                                 <br />
                                 <br />
-                                <FormAdd list={list} setList={setList}/>
+                                <FormAdd list={list} setList={setList} />
                             </section>
                             <section className="border border-todo-list-item mx-auto m-3 border-0">
                                 <TodoList list={list} setList={setList} />
