@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 const IsDone = (prop) => {
     let { todo, updatedList, setUpdatedList, setList } = prop
 
-    const handleCheckboxChange = (todoId) => {
+    const handleCheckboxChange = async (todoId) => {
         const newList = updatedList.map(item => {
             if (item.id === todoId) {
                 return { ...item, is_done: !item.is_done };
