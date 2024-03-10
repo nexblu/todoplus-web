@@ -48,8 +48,7 @@ const FormAdd = (prop) => {
             const data = {
                 username: username,
                 task: task,
-                created_at: currentUTCTimestampInSeconds,
-                is_done: false
+                created_at: currentUTCTimestampInSeconds
             };
             const response = await fetch('http://localhost:5000/todoplus/v1/todolist', {
                 method: 'POST',
