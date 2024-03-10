@@ -12,7 +12,7 @@ const Logout = () => {
 
     return (
         <>
-            <IoExit onClick={handleRemoveCookie} />
+            <IoExit onClick={handleRemoveCookie} type="button" />
         </>
     )
 }

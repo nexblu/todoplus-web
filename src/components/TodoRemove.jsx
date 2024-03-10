@@ -41,7 +41,7 @@ const TodoRemove = (prop) => {
             console.error('Terjadi kesalahan:', error);
             return false;
         }
-    };    
+    };
 
     const handleClick = () => {
         const result = userRemoveTodo(user['username'], id)
@@ -54,7 +54,7 @@ const TodoRemove = (prop) => {
     return (
         <>
             <div className="d-flex flex-row-reverse">
-                <div><IoMdTrash className="trash-icon" onClick={handleClick} /></div>
+                <div><IoMdTrash className="trash-icon" onClick={handleClick} type="button" /></div>
             </div>
         </>
     )

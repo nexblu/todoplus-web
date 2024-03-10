@@ -100,7 +100,7 @@ const FormAdd = (prop) => {
                 <div className="pe-2 ps-2 mx-auto">
                     <Form onSubmit={handleTask}>
                         <div className="border rounded-circle btn-add-task border-0" onClick={handleTask}>
-                            <FaPlus />
+                            <FaPlus type="button" />
                         </div>
                     </Form>
                 </div>
