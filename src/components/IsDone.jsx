@@ -1,17 +1,56 @@
 import { Form } from 'react-bootstrap';
 
 const IsDone = (prop) => {
-    let { todo, updatedList, setUpdatedList, setList } = prop
+    const { todo, updatedList, setUpdatedList, setList, user } = prop;
 
-    const handleCheckboxChange = async (todoId) => {
-        const newList = updatedList.map(item => {
+    const userIsDone = (id, is_done, callback) => {
+        const data = {
+            username: user.username,
+            id: id,
+            is_done: is_done
+        };
+        fetch('http://localhost:5000/todoplus/v1/todolist/is_done', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(resp => {
+            console.table(resp);
+            if (resp.status_code === 200) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        })
+        .catch(error => {
+            console.error('Terjadi kesalahan:', error);
+            callback(false);
+        });
+    };
+
+    const handleCheckboxChange = (todoId) => {
+        console.log(user);
+        updatedList.map(item => {
             if (item.id === todoId) {
+                userIsDone(todoId, !item.is_done, success => {
+                    if (success) {
+                        setUpdatedList(prevList => {
+                            const updatedItem = { ...item, is_done: !item.is_done };
+                            return prevList.map(prevItem => prevItem.id === todoId ? updatedItem : prevItem);
+                        });
+                        setList(prevList => {
+                            const updatedItem = { ...item, is_done: !item.is_done };
+                            return prevList.map(prevItem => prevItem.id === todoId ? updatedItem : prevItem);
+                        });
+                    }
+                });
                 return { ...item, is_done: !item.is_done };
             }
             return item;
         });
-        setUpdatedList(newList);
-        setList(newList);
     };
 
     return (
@@ -23,7 +62,7 @@ const IsDone = (prop) => {
                 onChange={() => handleCheckboxChange(todo.id)}
             />
         </>
-    )
-}
+    );
+};
 
-export default IsDone
+export default IsDone;
