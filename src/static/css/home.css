@@ -4,18 +4,19 @@ body .container-fluid.container-home {
 }
 body .container-fluid.container-home .border-home {
   width: 90%;
+  background-color: #061E47;
 }
 body .container-fluid.container-home .border-home .row .col .border-home-task {
   width: 70%;
 }
 body .container-fluid.container-home .border-home .row .col .border-home-task .row {
-  background-color: #35374B;
+  background-color: #68A4F1;
   padding: 2rem 0 2rem 0;
 }
 body .container-fluid.container-home .border-home .row .col .border-home-task .row [class^=col] .count-task {
   width: 150px;
   height: 150px;
-  background-color: #0B5ED7;
+  background-color: #061E47;
 }
 body .container-fluid.container-home .border-home .row .col .border-home-task .row [class^=col] .count-task h1 {
   padding-top: 3.3rem;
@@ -29,7 +30,8 @@ body .container-fluid.container-home .border-home .row .col .border-home-task .t
 body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p] .btn-add-task {
   width: 50px;
   height: 50px;
-  background-color: #0B5ED7;
+  background-color: #68A4F1;
+  padding-top: 10px;
 }
 body .container-fluid.container-home .border-home .row .col .border-todo-list-item {
   width: 70%;
@@ -40,7 +42,7 @@ body .container-fluid.container-home .border-home .row .col .border-todo-list-it
   margin: 0;
 }
 body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item {
-  background-color: #50727B;
+  background-color: #2B6AD0;
   padding: 1px 0 0 0;
 }
 body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item {

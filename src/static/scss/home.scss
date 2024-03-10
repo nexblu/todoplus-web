@@ -5,6 +5,7 @@ body {
 
         .border-home {
             width: 90%;
+            background-color: #061E47;
 
             .row {
                 .col {
@@ -12,13 +13,13 @@ body {
                         width: 70%;
 
                         .row {
-                            background-color: #35374B;
+                            background-color: #68A4F1;
                             padding: 2rem 0 2rem 0;
                             [class^="col"] {
                                 .count-task {
                                     width: 150px;
                                     height: 150px;
-                                    background-color: #0B5ED7;
+                                    background-color: #061E47;
                                     h1 {
                                         padding-top: 3.3rem;
                                     }
@@ -39,7 +40,8 @@ body {
                                 .btn-add-task {
                                     width: 50px;
                                     height: 50px;
-                                    background-color: #0B5ED7;
+                                    background-color: #68A4F1;
+                                    padding-top: 10px;
                                 }
                             }
                         }
@@ -53,7 +55,7 @@ body {
                             padding: 0;
                             margin: 0;
                             li.li-todo-list-item {
-                                background-color: #50727B;
+                                background-color: #2B6AD0;
                                 padding: 1px 0 0 0;
                                 .flex-todo-list-item {
                                     margin: 1rem 0 0 0;
