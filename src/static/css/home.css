@@ -49,6 +49,11 @@ body .container-fluid.container-home .border-home .row .col .border-todo-list-it
 body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item .btn-is-done {
   margin-left: 1rem;
 }
+body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item .trash-icon {
+  width: 26px;
+  height: 26px;
+  margin-right: 1rem;
+}
 
 @media only screen and (min-width: 576px) {
   [class^=d] [class^=p] .btn-576 {
