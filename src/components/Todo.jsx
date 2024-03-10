@@ -32,7 +32,7 @@ const Todo = (prop) => {
     return (
         <>
             {currentTasks.map((todo) => (
-                <li key={todo.id} className='border m-2 rounded li-todo-list-item border-0 mb-3'>
+                <li key={todo.id} className='border m-2 rounded li-todo-list-item li-todo-list-item-light border-0 mb-3'>
                     <div className="d-flex justify-content-between flex-todo-list-item">
                         <IsDone todo={todo} updatedList={updatedList} setUpdatedList={setUpdatedList} setList={setList} user={user} />
                         <p className={`ms-3 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>{todo.task}</p>

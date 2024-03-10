@@ -1,7 +1,6 @@
 import '../static/css/home.css'
 import { Container } from 'react-bootstrap'
 import { Helmet } from "react-helmet";
-import { FaRegSun } from "react-icons/fa";
 import FormAdd from '../components/FormAdd';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from "react";
@@ -9,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import TodoList from '../components/TodoList';
 import CountTodo from '../components/CountTodo';
 import Logout from '../components/Logout';
+import DarkTheme from '../components/DarkTheme';
 
 const Home = () => {
     const navigate = useNavigate();
     const [list, setList] = useState([]);
+    const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
@@ -31,13 +32,13 @@ const Home = () => {
                 <br />
                 <br />
                 <br />
-                <section className="border rounded text-light shadow-lg text-center border-home mx-auto">
+                <section className={`border rounded text-light shadow-lg text-center border-home ${isDark === false ? 'border-home-light' : 'border-home-dark'} mx-auto`}>
                     <div className="row justify-content-between m-3">
                         <div className="col-4">
                             <p className='fw-bold'>TODOPLUS</p>
                         </div>
                         <div className="col-4">
-                            <FaRegSun />
+                            <DarkTheme isDark={isDark} setIsDark={setIsDark}/>
                         </div>
                         <div className="col-4">
                             <Logout />
@@ -52,7 +53,7 @@ const Home = () => {
                                         <p>Keep It Up</p>
                                     </div>
                                     <div className="col-md-4 pt-1">
-                                        <div className="border rounded-circle mx-auto count-task border-0">
+                                        <div className="border rounded-circle mx-auto count-task count-task-light border-0">
                                             <CountTodo list={list} />
                                         </div>
                                     </div>
