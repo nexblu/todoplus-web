@@ -1,7 +1,6 @@
 import '../static/css/home.css'
 import { Container } from 'react-bootstrap'
 import { Helmet } from "react-helmet";
-import { IoExit } from "react-icons/io5";
 import { FaRegSun } from "react-icons/fa";
 import FormAdd from '../components/FormAdd';
 import Cookies from 'js-cookie';
@@ -9,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TodoList from '../components/TodoList';
 import CountTodo from '../components/CountTodo';
+import Logout from '../components/Logout';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ const Home = () => {
                             <FaRegSun />
                         </div>
                         <div className="col-4">
-                            <IoExit />
+                            <Logout />
                         </div>
                     </div>
                     <div className="row">
