@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const CountTodo = (prop) => {
     const { list } = prop;
-    const [countTodo, setCountTodo] = useState([]);
+    const [countTodo, setCountTodo] = useState([0, 0]);
 
     useEffect(() => {
         const calculateTodo = async () => {
