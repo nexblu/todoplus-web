@@ -46,7 +46,7 @@ const TodoList = (prop) => {
                 </Spinner>
             ) : (
                 <ul>
-                    <Todo list={list} setList={setList}/>
+                    <Todo list={list} setList={setList} user={user}/>
                 </ul>
             )}
         </>
