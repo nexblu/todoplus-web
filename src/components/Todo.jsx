@@ -36,7 +36,7 @@ const Todo = (prop) => {
                     <div className="d-flex justify-content-between flex-todo-list-item">
                         <IsDone todo={todo} updatedList={updatedList} setUpdatedList={setUpdatedList} setList={setList} user={user} />
                         <p className={`ms-3 ${todo.is_done ? 'text-decoration-line-through' : ''}`}>{todo.task}</p>
-                        <TodoRemove />
+                        <TodoRemove list={list} setList={setList} id={todo.id} />
                     </div>
                 </li>
             ))}

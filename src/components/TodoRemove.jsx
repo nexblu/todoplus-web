@@ -1,10 +1,60 @@
 import { IoMdTrash } from "react-icons/io";
+import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import 'react-toastify/dist/ReactToastify.css';
+import { jwtDecode } from 'jwt-decode';
 
-const TodoRemove = () => {
+const TodoRemove = (prop) => {
+    let { list, setList, id } = prop
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        try {
+            const accessToken = Cookies.get('access_token');
+            const decodedToken = jwtDecode(accessToken);
+            setUser(decodedToken)
+        } catch (error) {
+            // error
+        }
+    }, [setUser]);
+
+    const userRemoveTodo = async (username, id) => {
+        try {
+            const data = {
+                username: username,
+                id: id
+            };
+            const response = await fetch('http://localhost:5000/todoplus/v1/todolist', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const resp = await response.json();
+            if (resp['status_code'] === 200) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error('Terjadi kesalahan:', error);
+            return false;
+        }
+    };    
+
+    const handleClick = () => {
+        const result = userRemoveTodo(user['username'], id)
+        if (result) {
+            let newArray = list.filter(element => element.id !== id);
+            setList(newArray)
+        }
+    };
+
     return (
         <>
             <div className="d-flex flex-row-reverse">
-                <div><IoMdTrash className="trash-icon"/></div>
+                <div><IoMdTrash className="trash-icon" onClick={handleClick} /></div>
             </div>
         </>
     )
