@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import '../static/css/login.css'
+import icon from '../static/image/Screenshot_2024-03-10_23-25-16-removebg-preview.png'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Login = () => {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Login</title>
+                <link rel="icon" type="image/svg+xml" href={icon} />
             </Helmet>
             <Container fluid className='login'>
                 <br />

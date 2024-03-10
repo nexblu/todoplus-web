@@ -9,6 +9,7 @@ import TodoList from '../components/TodoList';
 import CountTodo from '../components/CountTodo';
 import Logout from '../components/Logout';
 import DarkTheme from '../components/DarkTheme';
+import icon from '../static/image/Screenshot_2024-03-10_23-25-16-removebg-preview.png'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Home = () => {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>Home</title>
+                <link rel="icon" type="image/svg+xml" href={icon} />
             </Helmet>
             <Container fluid className='container-home'>
                 <br />
