@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 const IsDone = (prop) => {
     const { todo, updatedList, setUpdatedList, setList, user } = prop;
+    const [fetching, setFetching] = useState(false);
 
     const userIsDone = (id, is_done, callback) => {
+        setFetching(true);
         const data = {
             username: user.username,
             id: id,
@@ -28,11 +31,14 @@ const IsDone = (prop) => {
         .catch(error => {
             console.error('Terjadi kesalahan:', error);
             callback(false);
+        })
+        .finally(() => {
+            setFetching(false);
         });
     };
 
     const handleCheckboxChange = (todoId) => {
-        console.log(user);
+        if (fetching) return;
         updatedList.map(item => {
             if (item.id === todoId) {
                 userIsDone(todoId, !item.is_done, success => {
@@ -60,6 +66,7 @@ const IsDone = (prop) => {
                 className='btn-is-done'
                 checked={todo.is_done}
                 onChange={() => handleCheckboxChange(todo.id)}
+                disabled={fetching} 
             />
         </>
     );
