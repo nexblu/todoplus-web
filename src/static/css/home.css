@@ -24,6 +24,9 @@ body .container-fluid.container-home .border-home .row [class^=col] .border-home
 body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task-light {
   background-color: #061E47;
 }
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task-dark {
+  background-color: #05263B;
+}
 body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task {
   width: 150px;
   height: 150px;

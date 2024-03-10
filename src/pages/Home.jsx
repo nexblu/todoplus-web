@@ -38,7 +38,7 @@ const Home = () => {
                             <p className='fw-bold'>TODOPLUS</p>
                         </div>
                         <div className="col-4">
-                            <DarkTheme isDark={isDark} setIsDark={setIsDark}/>
+                            <DarkTheme isDark={isDark} setIsDark={setIsDark} />
                         </div>
                         <div className="col-4">
                             <Logout />
@@ -53,7 +53,7 @@ const Home = () => {
                                         <p>Keep It Up</p>
                                     </div>
                                     <div className="col-md-4 pt-1">
-                                        <div className="border rounded-circle mx-auto count-task count-task-light border-0">
+                                        <div className={`border rounded-circle mx-auto count-task ${isDark === false ? 'count-task-light' : 'count-task-dark'} border-0`}>
                                             <CountTodo list={list} />
                                         </div>
                                     </div>
