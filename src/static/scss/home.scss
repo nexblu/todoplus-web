@@ -16,9 +16,12 @@ body {
                             padding: 2rem 0 2rem 0;
                             [class^="col"] {
                                 .count-task {
-                                    width: 100px;
-                                    height: 100px;
+                                    width: 150px;
+                                    height: 150px;
                                     background-color: #0B5ED7;
+                                    h1 {
+                                        padding-top: 3.3rem;
+                                    }
                                 }
                             }
                         }

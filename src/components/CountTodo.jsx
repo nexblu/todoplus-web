@@ -22,7 +22,7 @@ const CountTodo = (prop) => {
 
     return (
         <>
-            <h1 className='pt-4'>{`${countTodo[0]}/${countTodo[1]}`}</h1>
+            <h1>{`${countTodo[0]}/${countTodo[1]}`}</h1>
         </>
     );
 };

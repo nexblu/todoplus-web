@@ -13,9 +13,12 @@ body .container-fluid.container-home .border-home .row .col .border-home-task .r
   padding: 2rem 0 2rem 0;
 }
 body .container-fluid.container-home .border-home .row .col .border-home-task .row [class^=col] .count-task {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-color: #0B5ED7;
+}
+body .container-fluid.container-home .border-home .row .col .border-home-task .row [class^=col] .count-task h1 {
+  padding-top: 3.3rem;
 }
 body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p].area-input {
   width: 800px;
