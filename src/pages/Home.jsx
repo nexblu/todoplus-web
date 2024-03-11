@@ -14,7 +14,7 @@ import icon from '../static/image/Screenshot_2024-03-10_23-25-16-removebg-previe
 const Home = () => {
     const navigate = useNavigate();
     const [list, setList] = useState([]);
-    const [isDark, setIsDark] = useState(false);
+    const [isDark, setIsDark] = useState(true);
 
     useEffect(() => {
         const accessToken = Cookies.get('access_token');
@@ -30,11 +30,12 @@ const Home = () => {
                 <title>Home</title>
                 <link rel="icon" type="image/svg+xml" href={icon} />
             </Helmet>
-            <Container fluid className='container-home'>
+            <Container fluid className={`container-home ${isDark === true ? 'container-home-dark' : 'container-home-light'}`}>
                 <br />
                 <br />
                 <br />
-                <section className={`border rounded text-light shadow-lg text-center border-home ${isDark === false ? 'border-home-light' : 'border-home-dark'} mx-auto`}>
+                <section className={`border rounded border-0 text-light shadow-lg text-center border-home ${isDark === false ? 'border-home-light' : 'border-home-dark'} mx-auto`}>
+                    <br />
                     <div className="row justify-content-between m-3">
                         <div className="col-4">
                             <p className='fw-bold'>TODOPLUS</p>

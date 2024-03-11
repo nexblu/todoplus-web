@@ -1,12 +1,17 @@
+body .container-fluid.container-home-dark {
+  background-color: #171823;
+}
+body .container-fluid.container-home-light {
+  background-color: #FBFBFB;
+}
 body .container-fluid.container-home {
   min-height: 100vh;
-  background-color: #FBFBFB;
 }
 body .container-fluid.container-home .border-home-light {
   background-color: #061E47;
 }
 body .container-fluid.container-home .border-home-dark {
-  background-color: #05263B;
+  background-color: #242533;
 }
 body .container-fluid.container-home .border-home {
   width: 90%;
@@ -25,7 +30,7 @@ body .container-fluid.container-home .border-home .row [class^=col] .border-home
   background-color: #061E47;
 }
 body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task-dark {
-  background-color: #05263B;
+  background-color: #242533;
 }
 body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task {
   width: 150px;

@@ -1,12 +1,17 @@
 body {
+    .container-fluid.container-home-dark {
+        background-color: #171823;
+    }
+    .container-fluid.container-home-light {
+        background-color: #FBFBFB;
+    }
     .container-fluid.container-home {
         min-height: 100vh;
-        background-color: #FBFBFB;
         .border-home-light {
             background-color: #061E47;
         }
         .border-home-dark {
-            background-color: #05263B;
+            background-color: #242533;
         }
         .border-home {
             width: 90%;
@@ -27,7 +32,7 @@ body {
                                     background-color: #061E47;
                                 }
                                 .count-task-dark {
-                                    background-color: #05263B;
+                                    background-color: #242533;
                                 }
                                 .count-task {
                                     width: 150px;
