@@ -29,6 +29,15 @@ const Todo = (prop) => {
         }
     };
 
+    const goToFirstPage = () => {
+        setCurrentPage(1);
+    };
+
+    const goToLastPage = () => {
+        const lastPage = Math.ceil(updatedList.length / tasksPerPage);
+        setCurrentPage(lastPage);
+    };
+
     return (
         <>
             {currentTasks.map((todo) => (
@@ -41,9 +50,11 @@ const Todo = (prop) => {
                 </li>
             ))}
             <Pagination className="justify-content-center">
+                <Pagination.First onClick={goToFirstPage} disabled={currentPage === 1} />
                 <Pagination.Prev onClick={prevPage} disabled={currentPage === 1} />
                 <Pagination.Item active>{currentPage}</Pagination.Item>
                 <Pagination.Next onClick={nextPage} disabled={indexOfLastTask >= updatedList.length} />
+                <Pagination.Last onClick={goToLastPage} disabled={indexOfLastTask >= updatedList.length} />
             </Pagination>
         </>
     );
