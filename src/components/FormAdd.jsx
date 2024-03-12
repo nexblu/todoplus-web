@@ -11,6 +11,7 @@ const FormAdd = (prop) => {
     let { setList } = prop
     const [task, setTask] = useState('');
     const [user, setUser] = useState({});
+    const [fetching, setFetching] = useState(false);
 
     useEffect(() => {
         try {
@@ -79,6 +80,7 @@ const FormAdd = (prop) => {
 
     const handleTask = async (e) => {
         e.preventDefault();
+        setFetching(true)
         if (task !== '') {
             const result = await userAddTodo(user['username'], task);
             if (result) {
@@ -91,6 +93,7 @@ const FormAdd = (prop) => {
         } else {
             errorAdd('Failed Add Todo.');
         }
+        setFetching(false)
     };
 
     return (
@@ -100,8 +103,8 @@ const FormAdd = (prop) => {
                     <ResponsivePlaceholder task={task} setTask={setTask} />
                 </div>
                 <div className="pe-2 ps-2 mx-auto">
-                    <Form onSubmit={handleTask}>
-                        <div className="border rounded-circle btn-add-task border-0 btn-add-task-light" onClick={handleTask}>
+                    <Form onSubmit={fetching === false ? handleTask : ''}>
+                        <div className="border rounded-circle btn-add-task border-0 btn-add-task-light" onClick={fetching === false ? handleTask : ''}>
                             <FaPlus type="button" />
                         </div>
                     </Form>
@@ -109,8 +112,8 @@ const FormAdd = (prop) => {
             </div>
             <div className="d-flex flex-row mb-3">
                 <div className="p-2">
-                    <Form onSubmit={handleTask}>
-                        <Button variant="primary" type="submit" className='btn-576' onClick={handleTask}>Add</Button>{' '}
+                    <Form onSubmit={fetching === false ? handleTask : ''}>
+                        <Button variant="primary" type="submit" className='btn-576' onClick={fetching === false ? handleTask : ''}>Add</Button>{' '}
                     </Form>
                 </div>
             </div>

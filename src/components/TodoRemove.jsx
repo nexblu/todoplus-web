@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 const TodoRemove = (prop) => {
     let { list, setList, id } = prop
     const [user, setUser] = useState({});
+    const [fetching, setFetching] = useState(false);
 
     useEffect(() => {
         try {
@@ -44,17 +45,19 @@ const TodoRemove = (prop) => {
     };
 
     const handleClick = () => {
+        setFetching(true)
         const result = userRemoveTodo(user['username'], id)
         if (result) {
             let newArray = list.filter(element => element.id !== id);
             setList(newArray)
         }
+        setFetching(false)
     };
 
     return (
         <>
             <div className="d-flex flex-row-reverse">
-                <div><IoMdTrash className="trash-icon" onClick={handleClick} type="button" /></div>
+                <div><IoMdTrash className="trash-icon" onClick={fetching === false ? handleClick : ''} type="button" /></div>
             </div>
         </>
     )
