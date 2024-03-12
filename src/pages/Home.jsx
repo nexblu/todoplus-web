@@ -63,7 +63,7 @@ const Home = () => {
                                 </div>
                                 <br />
                                 <br />
-                                <FormAdd list={list} setList={setList} />
+                                <FormAdd setList={setList} />
                             </section>
                             <section className="border border-todo-list-item mx-auto m-3 border-0">
                                 <TodoList list={list} setList={setList} />
