@@ -25,7 +25,7 @@ const TodoList = (prop) => {
             const getTodo = async () => {
                 setLoading(true);
                 try {
-                    const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/${user.username}`);
+                    const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/todolist/${user.username}`);
                     const json = await response.json();
                     setList(json[0]['result']);
                 } catch (error) {

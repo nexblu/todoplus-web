@@ -43,7 +43,7 @@ const FormAdd = (prop) => {
 
     const getTodo = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/${user.username}`);
+            const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/todolist/${user.username}`);
             const json = await response.json();
             setList(json[0]['result']);
         } catch (error) {
@@ -59,7 +59,7 @@ const FormAdd = (prop) => {
                 task: task,
                 created_at: currentUTCTimestampInSeconds
             };
-            const response = await fetch('http://localhost:5000/todoplus/v1/todolist', {
+            const response = await fetch('https://web-production-56f81.up.railway.app/todoplus/v1/todolist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

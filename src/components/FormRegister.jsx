@@ -19,7 +19,7 @@ const FormRegister = () => {
     const [loading, setLoading] = useState(false);
 
     const userLogin = async (username, password) => {
-        const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
+        const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
         return data;
     }
@@ -31,7 +31,7 @@ const FormRegister = () => {
                 email: email,
                 password: password
             };
-            const response = await fetch('http://localhost:5000/todoplus/v1/register', {
+            const response = await fetch('https://web-production-56f81.up.railway.app/todoplus/v1/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const FormRegister = () => {
 
     const validateEmail = async (email) => {
         try {
-            const response = await fetch(`http://localhost:5000/todoplus/v1/email/${email}`);
+            const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/email/${email}`);
             const data = await response.json();
             if (data['status_code'] === 200) {
                 return true;
