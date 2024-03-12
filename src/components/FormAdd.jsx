@@ -82,13 +82,6 @@ const FormAdd = (prop) => {
         if (task !== '') {
             const result = await userAddTodo(user['username'], task);
             if (result) {
-                // const newList = [...list, {
-                //     username: user['username'],
-                //     task: task,
-                //     created_at: createdAt,
-                //     is_done: false
-                // }];
-                // setList(newList)
                 await getTodo()
                 clearForm();
                 successAdd('Success Add Todo.');
