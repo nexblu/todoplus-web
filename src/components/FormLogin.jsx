@@ -18,7 +18,7 @@ const FormLogin = () => {
     const [loading, setLoading] = useState(false);
 
     const userLogin = async (username, password) => {
-        const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/login/${username}/${password}`);
+        const response = await fetch(`http://127.0.0.1:5000/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
         return data;
     }
@@ -97,7 +97,7 @@ const FormLogin = () => {
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <Form.Text className="text-danger">Password Is Required.</Form.Text>}
                 </Form.Group>
-                <a href="/" className='text-light'>Forgot Password</a>
+                <a href="/forget-reset-password" className='text-light'>Forgot Password</a>
                 <Button variant="primary" type="submit" className='mt-3' disabled={loading}>
                     {loading ? 'Loading...' : 'Login'}
                 </Button>

@@ -7,19 +7,22 @@ const FormRegister = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const [emailError, setEmailError] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
     const [messageEmailError, setMessageEmailError] = useState('');
     const [messageUsernameError, setMessageUsernameError] = useState('');
     const [messagePasswordError, setMessagePasswordError] = useState('');
+    const [confirmMessagePasswordError, setConfirmMessagePasswordError] = useState('');
 
     const [loading, setLoading] = useState(false);
 
     const userLogin = async (username, password) => {
-        const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/login/${username}/${password}`);
+        const response = await fetch(`http://127.0.0.1:5000/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
         return data;
     }
@@ -31,7 +34,7 @@ const FormRegister = () => {
                 email: email,
                 password: password
             };
-            const response = await fetch('https://web-production-56f81.up.railway.app/todoplus/v1/register', {
+            const response = await fetch(`http://127.0.0.1:5000/todoplus/v1/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,7 +56,7 @@ const FormRegister = () => {
 
     const validateEmail = async (email) => {
         try {
-            const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/email/${email}`);
+            const response = await fetch(`http://127.0.0.1:5000/todoplus/v1/email/${email}`);
             const data = await response.json();
             if (data['status_code'] === 200) {
                 return true;
@@ -70,6 +73,7 @@ const FormRegister = () => {
         setEmail('');
         setUsername('');
         setPassword('');
+        setConfirmPassword('');
     }
 
     const successRegis = async (text) => {
@@ -112,12 +116,22 @@ const FormRegister = () => {
             setUsernameError(false);
         }
 
-        if (password === '') {
+        if (password === '' && confirmPassword === '') {
             setPasswordError(true);
             valid = false;
             setMessagePasswordError('Password Is Required.')
+            setConfirmMessagePasswordError('Password Is Required.')
         } else {
-            setPasswordError(false);
+            if (password === confirmPassword) {
+                setPasswordError(false);
+                setConfirmPasswordError(false);
+            } else {
+                setPasswordError(true);
+                setConfirmPasswordError(true)
+                valid = false;
+                setMessagePasswordError('Password And Confirm Password Are Different.')
+                setConfirmPasswordError('Password And Confirm Password Are Different.')
+            }
         }
 
         return valid;
@@ -165,6 +179,11 @@ const FormRegister = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <Form.Text className="text-danger">{messagePasswordError}</Form.Text>}
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    {confirmPasswordError && <Form.Text className="text-danger">{confirmMessagePasswordError}</Form.Text>}
                 </Form.Group>
                 <Button variant="primary" className='mt-3' type='submit' disabled={loading}>
                 {loading ? 'Loading...' : 'Register'}
