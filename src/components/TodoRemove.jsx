@@ -26,7 +26,7 @@ const TodoRemove = (prop) => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch('https://web-production-56f81.up.railway.app/todoplus/v1/todolist', {
+            const response = await fetch('https://web-production-b0d3.up.railway.app/todoplus/v1/todolist', {
                 method: 'DELETE',
                 headers: headers,
                 body: JSON.stringify({

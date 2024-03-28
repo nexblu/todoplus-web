@@ -48,7 +48,7 @@ const FormAdd = (prop) => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
 
-            const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/todolist/${user.username}`, {
+            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/${user.username}`, {
                 method: 'GET',
                 headers: headers
             });
@@ -63,7 +63,7 @@ const FormAdd = (prop) => {
     const userAddTodo = async (username, task) => {
         console.log(token)
         try {
-            const url = 'http://localhost:5000/todoplus/v1/todolist';
+            const url = 'https://web-production-b0d3.up.railway.app/todoplus/v1/todolist';
             const response = await fetch(url, {
                 method: 'POST',
                 mode: 'cors',
