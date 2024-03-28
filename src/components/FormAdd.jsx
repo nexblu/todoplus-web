@@ -12,16 +12,18 @@ const FormAdd = (prop) => {
     const [task, setTask] = useState('');
     const [user, setUser] = useState({});
     const [fetching, setFetching] = useState(false);
+    const [token, setToken] = useState('');
 
     useEffect(() => {
         try {
             const accessToken = Cookies.get('access_token');
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken)
+            setToken(accessToken)
         } catch (error) {
             // error
         }
-    }, [setUser]);
+    }, [setUser, setToken]);
 
     const clearForm = async () => {
         setTask('');
@@ -43,7 +45,14 @@ const FormAdd = (prop) => {
 
     const getTodo = async () => {
         try {
-            const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/todolist/${user.username}`);
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${token}`);
+
+            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/${user.username}`, {
+                method: 'GET',
+                headers: headers
+            });
+
             const json = await response.json();
             setList(json[0]['result']);
         } catch (error) {
@@ -52,19 +61,22 @@ const FormAdd = (prop) => {
     };
 
     const userAddTodo = async (username, task) => {
+        console.log(token)
         try {
-            const currentUTCTimestampInSeconds = Math.floor(new Date().getTime() / 1000);
-            const data = {
-                username: username,
-                task: task,
-                created_at: currentUTCTimestampInSeconds
-            };
-            const response = await fetch('https://web-production-56f81.up.railway.app/todoplus/v1/todolist', {
+            const url = 'https://web-production-b0d3.up.railway.app/todoplus/v1/todolist';
+            const response = await fetch(url, {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(
+                    {
+                        username: username,
+                        task: task
+                    }
+                )
             });
             const resp = await response.json();
             if (resp['status_code'] === 201) {
