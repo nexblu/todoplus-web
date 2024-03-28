@@ -1,50 +1,82 @@
+body .container-fluid.container-home-dark {
+  background-color: #171823;
+}
+body .container-fluid.container-home-light {
+  background-color: #FBFBFB;
+}
 body .container-fluid.container-home {
   min-height: 100vh;
-  background-color: #FBFBFB;
+}
+body .container-fluid.container-home .border-home-light {
+  background-color: #061E47;
+}
+body .container-fluid.container-home .border-home-dark {
+  background-color: #242533;
 }
 body .container-fluid.container-home .border-home {
   width: 90%;
 }
-body .container-fluid.container-home .border-home .row .col .border-home-task {
+body .container-fluid.container-home .border-home .row [class^=col] .dark-theme-area {
+  cursor: pointer;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task {
   width: 70%;
 }
-body .container-fluid.container-home .border-home .row .col .border-home-task .row {
-  background-color: #35374B;
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row {
+  background-color: #68A4F1;
   padding: 2rem 0 2rem 0;
 }
-body .container-fluid.container-home .border-home .row .col .border-home-task .row [class^=col] .count-task {
-  width: 100px;
-  height: 100px;
-  background-color: #0B5ED7;
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task-light {
+  background-color: #061E47;
 }
-body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p].area-input {
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task-dark {
+  background-color: #242533;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task {
+  width: 150px;
+  height: 150px;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .row [class^=col] .count-task h1 {
+  padding-top: 3.3rem;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .task-area [class^=p].area-input {
   width: 800px;
 }
-body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p] {
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .task-area [class^=p] {
   padding-top: 10px;
 }
-body .container-fluid.container-home .border-home .row .col .border-home-task .task-area [class^=p] .btn-add-task {
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .task-area [class^=p] .btn-add-task-light {
+  background-color: #68A4F1;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-home-task .task-area [class^=p] .btn-add-task {
   width: 50px;
   height: 50px;
-  background-color: #0B5ED7;
+  padding-top: 10px;
 }
-body .container-fluid.container-home .border-home .row .col .border-todo-list-item {
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item {
   width: 70%;
 }
-body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul {
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item {
-  background-color: #50727B;
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item ul li.li-todo-list-item-light {
+  background-color: #2B6AD0;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item ul li.li-todo-list-item {
   padding: 1px 0 0 0;
 }
-body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item {
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item {
   margin: 1rem 0 0 0;
 }
-body .container-fluid.container-home .border-home .row .col .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item .btn-is-done {
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item .btn-is-done {
   margin-left: 1rem;
+}
+body .container-fluid.container-home .border-home .row [class^=col] .border-todo-list-item ul li.li-todo-list-item .flex-todo-list-item .trash-icon {
+  width: 26px;
+  height: 26px;
+  margin-right: 1rem;
 }
 
 @media only screen and (min-width: 576px) {

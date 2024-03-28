@@ -8,20 +8,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import { jwtDecode } from 'jwt-decode';
 
 const FormAdd = (prop) => {
-    let { list, setList } = prop
+    let { setList } = prop
     const [task, setTask] = useState('');
-    const [createdAt, setCreatedAt] = useState(0);
     const [user, setUser] = useState({});
+    const [fetching, setFetching] = useState(false);
+    const [token, setToken] = useState('');
 
     useEffect(() => {
         try {
             const accessToken = Cookies.get('access_token');
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken)
+            setToken(accessToken)
         } catch (error) {
             // error
         }
-    }, [setUser]);
+    }, [setUser, setToken]);
 
     const clearForm = async () => {
         setTask('');
@@ -41,22 +43,40 @@ const FormAdd = (prop) => {
         });
     };
 
-    const userAddTodo = async (username, task) => {
+    const getTodo = async () => {
         try {
-            const currentUTCTimestampInSeconds = Math.floor(new Date().getTime() / 1000);
-            setCreatedAt(currentUTCTimestampInSeconds)
-            const data = {
-                username: username,
-                task: task,
-                created_at: currentUTCTimestampInSeconds,
-                is_done: false
-            };
-            const response = await fetch('http://localhost:5000/todoplus/v1/todolist', {
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${token}`);
+
+            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/${user.username}`, {
+                method: 'GET',
+                headers: headers
+            });
+
+            const json = await response.json();
+            setList(json[0]['result']);
+        } catch (error) {
+            // error handling
+        }
+    };
+
+    const userAddTodo = async (username, task) => {
+        console.log(token)
+        try {
+            const url = 'https://web-production-b0d3.up.railway.app/todoplus/v1/todolist';
+            const response = await fetch(url, {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(
+                    {
+                        username: username,
+                        task: task
+                    }
+                )
             });
             const resp = await response.json();
             if (resp['status_code'] === 201) {
@@ -72,16 +92,11 @@ const FormAdd = (prop) => {
 
     const handleTask = async (e) => {
         e.preventDefault();
+        setFetching(true)
         if (task !== '') {
             const result = await userAddTodo(user['username'], task);
             if (result) {
-                const newList = [...list, {
-                    username: user['username'],
-                    task: task,
-                    created_at: createdAt,
-                    is_done: false
-                }];
-                setList(newList)
+                await getTodo()
                 clearForm();
                 successAdd('Success Add Todo.');
             } else {
@@ -90,6 +105,7 @@ const FormAdd = (prop) => {
         } else {
             errorAdd('Failed Add Todo.');
         }
+        setFetching(false)
     };
 
     return (
@@ -99,17 +115,17 @@ const FormAdd = (prop) => {
                     <ResponsivePlaceholder task={task} setTask={setTask} />
                 </div>
                 <div className="pe-2 ps-2 mx-auto">
-                    <Form onSubmit={handleTask}>
-                        <div className="border rounded-circle btn-add-task pt-2 border-0" onClick={handleTask}>
-                            <FaPlus />
+                    <Form onSubmit={fetching === false ? handleTask : ''}>
+                        <div className="border rounded-circle btn-add-task border-0 btn-add-task-light" onClick={fetching === false ? handleTask : ''}>
+                            <FaPlus type="button" />
                         </div>
                     </Form>
                 </div>
             </div>
             <div className="d-flex flex-row mb-3">
                 <div className="p-2">
-                    <Form onSubmit={handleTask}>
-                        <Button variant="primary" type="submit" className='btn-576' onClick={handleTask}>Add</Button>{' '}
+                    <Form onSubmit={fetching === false ? handleTask : ''}>
+                        <Button variant="primary" type="submit" className='btn-576' onClick={fetching === false ? handleTask : ''}>Add</Button>{' '}
                     </Form>
                 </div>
             </div>

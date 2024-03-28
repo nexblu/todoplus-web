@@ -4,7 +4,7 @@ import Icon from '../static/image/Black_Circle_Icon_Internet_Logo-removebg-previ
 const IconLoginRegis = () => {
     return (
         <>
-            <div className="border border-0 rounded border-img-register border-img-login">
+            <div className="border border-0 rounded border-img-register border-img-forgot-password border-img-login">
                 <Image src={Icon} className='rounded-circle m-3' />
             </div>
         </>

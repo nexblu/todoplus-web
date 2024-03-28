@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,7 +19,7 @@ const FormLogin = () => {
     const [loading, setLoading] = useState(false);
 
     const userLogin = async (username, password) => {
-        const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
+        const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
         return data;
     }
@@ -57,17 +58,22 @@ const FormLogin = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        setLoading(true); 
+        setLoading(true);
         const isValid = validationForm();
         if (isValid) {
             userLogin(username, password)
                 .then(data => {
                     if (data['status_code'] === 200) {
-                        const token = data['result']['token'];
-                        Cookies.set('access_token', token);
-                        navigate('/')
-                        clearForm()
-                        setLoading(false);
+                        const decodedToken = jwtDecode(data['result']['token']);
+                        if (decodedToken['is_active'] === true) {
+                            navigate('/')
+                            clearForm()
+                            Cookies.set('access_token', data['result']['token']);
+                            setLoading(false);
+                        } else {
+                            setLoading(false);
+                            errorLogin('Failed Login.');
+                        }
                     } else {
                         setLoading(false);
                         errorLogin('Failed Login.');
@@ -97,7 +103,7 @@ const FormLogin = () => {
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <Form.Text className="text-danger">Password Is Required.</Form.Text>}
                 </Form.Group>
-                <a href="/" className='text-light'>Forgot Password</a>
+                <a href="/forget-reset-password" className='text-light'>Forgot Password</a>
                 <Button variant="primary" type="submit" className='mt-3' disabled={loading}>
                     {loading ? 'Loading...' : 'Login'}
                 </Button>

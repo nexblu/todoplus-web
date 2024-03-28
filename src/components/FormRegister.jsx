@@ -7,31 +7,63 @@ const FormRegister = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const [emailError, setEmailError] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [confirmPasswordError, setConfirmPasswordError] = useState(false);
 
     const [messageEmailError, setMessageEmailError] = useState('');
     const [messageUsernameError, setMessageUsernameError] = useState('');
     const [messagePasswordError, setMessagePasswordError] = useState('');
+    const [confirmMessagePasswordError, setConfirmMessagePasswordError] = useState('');
 
     const [loading, setLoading] = useState(false);
 
     const userLogin = async (username, password) => {
-        const response = await fetch(`http://localhost:5000/todoplus/v1/login/${username}/${password}`);
+        const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
         return data;
     }
 
+    const userVerify = async (email) => {
+        const currentUTCTimestampInSeconds = Math.floor(new Date().getTime() / 1000);
+        try {
+            const data = {
+                email: email,
+                created_at: currentUTCTimestampInSeconds
+            };
+            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/user/email-verify`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const resp = await response.json();
+            console.table(resp)
+            if (resp['status_code'] === 200) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error('Terjadi kesalahan:', error);
+            return false;
+        }
+    }
+
     const userRegister = async (email, username, password) => {
+        const currentUTCTimestampInSeconds = Math.floor(new Date().getTime() / 1000);
         try {
             const data = {
                 username: username,
                 email: email,
-                password: password
+                password: password,
+                created_at: currentUTCTimestampInSeconds
             };
-            const response = await fetch('http://localhost:5000/todoplus/v1/register', {
+            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,7 +85,7 @@ const FormRegister = () => {
 
     const validateEmail = async (email) => {
         try {
-            const response = await fetch(`http://localhost:5000/todoplus/v1/email/${email}`);
+            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/email/${email}`);
             const data = await response.json();
             if (data['status_code'] === 200) {
                 return true;
@@ -70,6 +102,7 @@ const FormRegister = () => {
         setEmail('');
         setUsername('');
         setPassword('');
+        setConfirmPassword('');
     }
 
     const successRegis = async (text) => {
@@ -112,12 +145,22 @@ const FormRegister = () => {
             setUsernameError(false);
         }
 
-        if (password === '') {
+        if (password === '' && confirmPassword === '') {
             setPasswordError(true);
             valid = false;
             setMessagePasswordError('Password Is Required.')
+            setConfirmMessagePasswordError('Password Is Required.')
         } else {
-            setPasswordError(false);
+            if (password === confirmPassword) {
+                setPasswordError(false);
+                setConfirmPasswordError(false);
+            } else {
+                setPasswordError(true);
+                setConfirmPasswordError(true)
+                valid = false;
+                setMessagePasswordError('Password And Confirm Password Are Different.')
+                setConfirmPasswordError('Password And Confirm Password Are Different.')
+            }
         }
 
         return valid;
@@ -134,9 +177,15 @@ const FormRegister = () => {
                 const register = await userRegister(email, username, password);
                 console.log(register);
                 if (register) {
-                    successRegis('Success Register.');
-                    clearForm();
-                    setLoading(false)
+                    const verify = userVerify(email)
+                    if (verify) {
+                        successRegis('Check Your Email.');
+                        clearForm();
+                        setLoading(false)
+                    } else {
+                        errorRegis('Failed Register.');
+                        setLoading(false)
+                    }
                 } else {
                     errorRegis('Failed Register.');
                     setLoading(false)
@@ -166,8 +215,13 @@ const FormRegister = () => {
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordError && <Form.Text className="text-danger">{messagePasswordError}</Form.Text>}
                 </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    {confirmPasswordError && <Form.Text className="text-danger">{confirmMessagePasswordError}</Form.Text>}
+                </Form.Group>
                 <Button variant="primary" className='mt-3' type='submit' disabled={loading}>
-                {loading ? 'Loading...' : 'Register'}
+                    {loading ? 'Loading...' : 'Register'}
                 </Button>
                 <ToastContainer />
             </Form>

@@ -9,12 +9,14 @@ const TodoList = (prop) => {
     let { list, setList } = prop;
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
+    const [token, setToken] = useState('');
 
     useEffect(() => {
         try {
             const accessToken = Cookies.get('access_token');
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken);
+            setToken(accessToken)
         } catch (error) {
             // error handling
         }
@@ -25,7 +27,14 @@ const TodoList = (prop) => {
             const getTodo = async () => {
                 setLoading(true);
                 try {
-                    const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/${user.username}`);
+                    const headers = new Headers();
+                    headers.append('Authorization', `Bearer ${token}`);
+
+                    const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/${user.username}`, {
+                        method: 'GET',
+                        headers: headers
+                    });
+
                     const json = await response.json();
                     setList(json[0]['result']);
                 } catch (error) {
@@ -36,7 +45,7 @@ const TodoList = (prop) => {
             };
             getTodo();
         }
-    }, [user, setList]);
+    }, [user, setList, token]);
 
     return (
         <>
@@ -46,7 +55,7 @@ const TodoList = (prop) => {
                 </Spinner>
             ) : (
                 <ul>
-                    <Todo list={list} setList={setList}/>
+                    <Todo list={list} setList={setList} user={user}/>
                 </ul>
             )}
         </>
