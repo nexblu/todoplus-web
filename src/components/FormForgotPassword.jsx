@@ -14,7 +14,7 @@ const FormForgotPassword = () => {
     const [loading, setLoading] = useState(false);
 
     const userEmail = async (email) => {
-        const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/user/email/${email}`);
+        const response = await fetch(`http://127.0.0.1:5000/todoplus/v1/user/email/${email}`);
         const data = await response.json();
         return data;
     }
@@ -23,7 +23,7 @@ const FormForgotPassword = () => {
         const data = {
             email: email,
         };
-        const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/user/reset/email-reset-password`, {
+        const response = await fetch(`http://127.0.0.1:5000/todoplus/v1/user/reset/email-reset-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

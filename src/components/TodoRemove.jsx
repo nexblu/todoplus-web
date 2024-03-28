@@ -8,12 +8,14 @@ const TodoRemove = (prop) => {
     let { list, setList, id } = prop
     const [user, setUser] = useState({});
     const [fetching, setFetching] = useState(false);
+    const [token, setToken] = useState('');
 
     useEffect(() => {
         try {
             const accessToken = Cookies.get('access_token');
             const decodedToken = jwtDecode(accessToken);
             setUser(decodedToken)
+            setToken(accessToken)
         } catch (error) {
             // error
         }
@@ -21,16 +23,16 @@ const TodoRemove = (prop) => {
 
     const userRemoveTodo = async (username, id) => {
         try {
-            const data = {
-                username: username,
-                id: id
-            };
-            const response = await fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/todolist`, {
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${token}`);
+            headers.append('Content-Type', 'application/json');
+            const response = await fetch('http://127.0.0.1:5000/todoplus/v1/todolist', {
                 method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                headers: headers,
+                body: JSON.stringify({
+                    username: username,
+                    id: id
+                })
             });
             const resp = await response.json();
             if (resp['status_code'] === 200) {

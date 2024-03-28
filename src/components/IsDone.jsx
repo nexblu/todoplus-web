@@ -12,7 +12,7 @@ const IsDone = (prop) => {
             id: id,
             is_done: is_done
         };
-        fetch(`https://web-production-56f81.up.railway.app/todoplus/v1/todolist/is_done`, {
+        fetch(`http://127.0.0.1:5000/todoplus/v1/todolist/is_done`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
