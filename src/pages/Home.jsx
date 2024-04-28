@@ -2,7 +2,7 @@ const Home = () => {
     return (
         <>
         <p>welcome to todoplus</p>
-        <a href="http://localhost:5173/login">Login</a>
+        <a href="https://todoplus-web.vercel.app/login">Login</a>
         </>
     )
 }

@@ -162,7 +162,7 @@ const FormLogin = () => {
                     </div>
                 </div>
                 {passwordError && <p className='text-[#DC3545] text-[14px]'>{messagePasswordError}</p>}
-                <a href="http://localhost:5173/reset-password" className='text-[#808080] text-[14px]'>Forgot Password</a>
+                <a href="https://todoplus-web.vercel.app/reset-password" className='text-[#808080] text-[14px]'>Forgot Password</a>
                 <br />
                 <button type="submit" className='text-[#F8F9FA] rounded w-full mb-5 mt-3 h-[2rem] bg-[#0B5ED7]'>{loading ? 'Loading ...' : 'Login'}</button>
                 <ToastContainer theme={'dark'} />
