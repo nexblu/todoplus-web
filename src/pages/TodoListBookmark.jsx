@@ -45,7 +45,7 @@ const TodoListBookmark = () => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/bookmark/${username}`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/bookmark/${username}`, {
                 method: 'GET',
                 headers: headers
             });

@@ -62,7 +62,7 @@ const FormRegister = () => {
     const userLogin = async (username, password) => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/login/${username}/${password}`, {
+        const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/login/${username}/${password}`, {
             method: 'GET',
             headers: headers
         });
@@ -85,7 +85,7 @@ const FormRegister = () => {
                 email: email,
                 expired_at: timestamp
             };
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/user/email-verify`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/user/email-verify`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(data)
@@ -150,7 +150,7 @@ const FormRegister = () => {
                 password: password,
                 confirm_password: confirmPassword
             };
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/register`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

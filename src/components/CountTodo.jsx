@@ -10,7 +10,7 @@ const CountTodo = (prop) => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/${username}`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/${username}`, {
                 method: 'GET',
                 headers: headers
             });
@@ -22,7 +22,7 @@ const CountTodo = (prop) => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/completed/${username}`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/completed/${username}`, {
                 method: 'GET',
                 headers: headers
             });

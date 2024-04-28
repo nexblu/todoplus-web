@@ -52,7 +52,7 @@ const FormLogin = () => {
                 email: email,
                 expired_at: timestamp
             };
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/user/email-verify`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/user/email-verify`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(data)
@@ -69,7 +69,7 @@ const FormLogin = () => {
     }
 
     const userLogin = async (username, password) => {
-        const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/login/${username}/${password}`);
+        const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/login/${username}/${password}`);
         const data = await response.json();
         if (data['status_code'] === 200) {
             const decodedToken = jwtDecode(data['result']['token']);
