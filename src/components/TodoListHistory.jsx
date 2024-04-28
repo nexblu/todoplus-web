@@ -43,7 +43,7 @@ const TodoListHistory = () => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-896c2.up.railway.app/todoplus/v1/todolist/log/${username}`, {
+            const response = await fetch(`https://web-production-df03.up.railway.app/todoplus/v1/todolist/log/${username}`, {
                 method: 'GET',
                 headers: headers
             });

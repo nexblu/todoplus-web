@@ -34,7 +34,7 @@ const TodoListPinned = (prop) => {
             username: username,
             log: log
         }
-        const response = await fetch('https://web-production-896c2.up.railway.app/todoplus/v1/todolist/log', {
+        const response = await fetch('https://web-production-df03.up.railway.app/todoplus/v1/todolist/log', {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(
@@ -58,7 +58,7 @@ const TodoListPinned = (prop) => {
                 username: username,
                 id: id
             };
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/todolist/pinned`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/pinned`, {
                 method: 'PUT',
                 headers: headers,
                 body: JSON.stringify(
@@ -88,7 +88,7 @@ const TodoListPinned = (prop) => {
             username: username,
             log: log
         }
-        const response = await fetch('https://web-production-896c2.up.railway.app/todoplus/v1/todolist/log', {
+        const response = await fetch('https://web-production-df03.up.railway.app/todoplus/v1/todolist/log', {
             method: 'POST',
             headers: headers,
             body: JSON.stringify(

@@ -38,7 +38,7 @@ const FormResetPassword = () => {
         try {
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/email-validator/${email}`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/email-validator/${email}`, {
                 method: 'GET',
                 headers: headers
             });
@@ -60,7 +60,7 @@ const FormResetPassword = () => {
             const data = {
                 email: email
             };
-            const response = await fetch(`https://web-production-b0d3.up.railway.app/todoplus/v1/user/reset/email-reset-password`, {
+            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/user/reset/email-reset-password`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(
