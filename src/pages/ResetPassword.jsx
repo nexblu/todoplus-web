@@ -24,7 +24,7 @@ const ResetPassword = () => {
                     <FormResetPassword />
                     <div className="flex flex-row px-5 text-center justify-center items-center">
                         <div className="text-[#808080] text-[14px] me-1">{"Don't Have Account?"}</div>
-                        <div><a href="http://localhost:5173/register" className="text-[#F8F9FA] text-[14px] ms-1">Register</a></div>
+                        <div><a href="https://todoplus-web.vercel.app/register" className="text-[#F8F9FA] text-[14px] ms-1">Register</a></div>
                     </div>
                     <br />
                 </section>

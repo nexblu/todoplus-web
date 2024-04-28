@@ -36,7 +36,7 @@ const Register = () => {
                     <FormRegister />
                     <div className="flex flex-row px-5 text-center justify-center items-center">
                         <div className="text-[#808080] text-[14px] me-1">{"Have Account?"}</div>
-                        <div><a href="http://localhost:5173/login" className="text-[#F8F9FA] text-[14px] ms-1">Login</a></div>
+                        <div><a href="https://todoplus-web.vercel.app/login" className="text-[#F8F9FA] text-[14px] ms-1">Login</a></div>
                     </div>
                     <br />
                 </section>
