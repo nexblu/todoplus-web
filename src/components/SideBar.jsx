@@ -124,20 +124,20 @@ const SideBar = () => {
                         </div>
                     </div>
                     {open ? <div className=" leading-7 text-left text-sm font-thin mt-2 w-4/5 mx-auto" id="submenu">
-                        <span>
-                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'Task' ? null : setTask}>Task</h1>
+                        <span onClick={page === 'Task' ? null : setTask} >
+                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" >Task</h1>
                         </span>
-                        <span>
-                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'Bookmark' ? null : setBookmark}>Bookmarks</h1>
+                        <span onClick={page === 'Bookmark' ? null : setBookmark}>
+                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" >Bookmarks</h1>
                         </span>
-                        <span>
-                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'Pinned' ? null : setPinned}>Task Pinned</h1>
+                        <span onClick={page === 'Pinned' ? null : setPinned}>
+                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" >Task Pinned</h1>
                         </span>
-                        <span>
-                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'AddTask' ? null : setAddTask}>Add Task</h1>
+                        <span onClick={page === 'AddTask' ? null : setAddTask}>
+                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" >Add Task</h1>
                         </span>
-                        <span>
-                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'History' ? null : setHistory}>History</h1>
+                        <span onClick={page === 'History' ? null : setHistory}>
+                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1">History</h1>
                         </span>
                     </div> : ''}
                     <div className="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#68A4F1]">
@@ -152,9 +152,9 @@ const SideBar = () => {
                             <p className="text-[15px] ml-4 text-gray-200">Calender</p>
                         </span>
                     </div>
-                    <div className="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#68A4F1]">
+                    <div className="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#68A4F1]" onClick={onLogout}>
                         <IoLogOut />
-                        <span className="text-[15px] ml-4 text-gray-200" onClick={onLogout}>Logout</span>
+                        <span className="text-[15px] ml-4 text-gray-200">Logout</span>
                     </div>
                     <div className="absolute bottom-0 left-0 p-4 w-full max-w-[280px] bg-[#374151] rounded-lg">
                         <div className="flex items-center">
@@ -163,8 +163,8 @@ const SideBar = () => {
                                 <h1 className="text-[10px] font-semi-bold">{getUsername()}</h1>
                                 <h1 className="text-[10px] font-semi-bold">{getEmail()}</h1>
                             </div>
-                            <div className='bg-[#0B5ED7] ms-auto rounded'>
-                                <BiSolidExit className='text-[20px] m-1 cursor-pointer' onClick={onLogout} />
+                            <div className='bg-[#0B5ED7] ms-auto rounded' onClick={onLogout} >
+                                <BiSolidExit className='text-[20px] m-1 cursor-pointer' />
                             </div>
                         </div>
                     </div>
