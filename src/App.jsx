@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -13,8 +13,9 @@ const verifyToken = async (accessToken, refreshToken) => {
     const { payload: payloadAccessToken } = await jwtVerify(accessToken, new TextEncoder().encode('D3V1N4634824ATKTP'));
     const { payload: payloadRefreshToken } = await jwtVerify(refreshToken, new TextEncoder().encode('D3V1N4634824ATKTP'));
     const now = Date.now() / 1000;
-    return payloadAccessToken['exp'] > now || payloadRefreshToken['exp'] > now;
+    return payloadAccessToken.exp > now && payloadRefreshToken.exp > now;
   } catch (error) {
+    console.error('Error verifying token:', error);
     return false;
   }
 };
@@ -26,26 +27,18 @@ const refreshTokenAPI = async () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ refresh_token: Cookies.get('refresh_token') })
     });
+
     const resp = await response.json();
-    
+
     if (resp.status_code === 201) {
       Cookies.set('access_token', resp.data.token.access_token);
-      return {
-        refreshed: true,
-        error: false
-      };
+      return { refreshed: true };
     } else {
-      return {
-        refreshed: false,
-        error: true
-      };
+      return { refreshed: false };
     }
   } catch (error) {
     console.error('Failed to refresh token:', error);
-    return {
-      refreshed: false,
-      error: true
-    };
+    return { refreshed: false };
   }
 };
 
@@ -56,16 +49,19 @@ const useAuth = () => {
     const checkAuth = async () => {
       const accessToken = Cookies.get('access_token');
       const refreshToken = Cookies.get('refresh_token');
+
       if (!accessToken || !refreshToken) {
         setAuth(false);
         return;
       }
 
       const isValid = await verifyToken(accessToken, refreshToken);
+
       if (isValid) {
         setAuth(true);
       } else {
         const refreshTokenResult = await refreshTokenAPI();
+
         if (refreshTokenResult.refreshed) {
           setAuth(true);
         } else {
@@ -75,20 +71,22 @@ const useAuth = () => {
         }
       }
     };
+
     checkAuth();
   }, []);
 
   return auth;
 };
 
-const PrivateRoute = () => {
+const PrivateRoute = (prop) => {
+  let {element} = prop
   const auth = useAuth();
 
   if (auth === null) {
     return null; // Optionally, render a loading indicator
   }
 
-  return auth ? <Outlet /> : <Navigate to="/" />;
+  return auth ? element : <Navigate to="/" />;
 };
 
 const App = () => {
@@ -104,9 +102,7 @@ const App = () => {
         <Route path='/' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/dashboard' element={<PrivateRoute />}>
-          <Route index element={<Dashboard />} />
-        </Route>
+        <Route path='/dashboard/*' element={<PrivateRoute element={<Dashboard />} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>
