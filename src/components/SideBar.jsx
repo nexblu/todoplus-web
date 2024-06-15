@@ -89,9 +89,11 @@ const SideBar = () => {
 
     const onLogout = () => {
         const accessToken = Cookies.get('access_token');
-        if (accessToken) {
+        const refreshToken = Cookies.get('refresh_token');
+        if (accessToken && refreshToken) {
             Cookies.remove('access_token');
-            navigate('/login');
+            Cookies.remove('refresh_token');
+            navigate('/');
         }
     }
 

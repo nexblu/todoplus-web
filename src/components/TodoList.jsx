@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
 import TodoListRemove from "./TodoListRemove";
 import TodoListEdit from "./TodoListEdit";
 import TodoListIsDone from "./TodoListIsDone";
@@ -45,11 +44,11 @@ const TodoList = (prop) => {
 
     useEffect(() => {
         setLoading(true);
-        const getTodo = async (token, username) => {
+        const getTodo = async (token) => {
             const headers = new Headers();
             headers.append('Authorization', `Bearer ${token}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/${username}`, {
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist`, {
                 method: 'GET',
                 headers: headers
             });
@@ -64,8 +63,7 @@ const TodoList = (prop) => {
 
         const accessToken = Cookies.get('access_token');
         if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            getTodo(accessToken, decodedToken.username);
+            getTodo(accessToken);
         }
     }, [setList, setLoading]);
 
