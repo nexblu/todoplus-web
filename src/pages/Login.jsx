@@ -22,9 +22,9 @@ const Login = () => {
                         <p className="text-center text-[#808080] text-[14px] pb-3">Please Enter Your Account Details</p>
                     </section>
                     <FormLogin />
-                    <div className="flex flex-row px-5 text-center justify-center items-center">
-                        <div className="text-[#808080] text-[14px] me-1">{"Don't Have Account?"}</div>
-                        <div><a href="https://todoplus-web.vercel.app/register" className="text-[#F8F9FA] text-[14px] ms-1">Register</a></div>
+                    <div className="flex flex-row px-5 justify-center items-center text-center">
+                        <div className="text-[#808080] text-[14px] me-1">{"Don't Have Account ?"}</div>
+                        <a href="http://localhost:5173/register" className="text-[#F8F9FA] text-[14px] ms-1">Register</a>
                     </div>
                     <br />
                 </section>

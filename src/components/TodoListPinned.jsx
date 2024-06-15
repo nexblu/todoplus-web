@@ -1,12 +1,37 @@
 import { TbPinnedFilled } from "react-icons/tb";
 import { useState } from "react";
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 const TodoListPinned = (prop) => {
     let { todo } = prop
 
     const [loading, setLoading] = useState(false)
     const [isPin, setIsPin] = useState(todo.is_pin)
+
+    const succesAdd = async () => {
+        toast.success(`Succes Pinned Task`, {
+            position: "bottom-right"
+        });
+    }
+
+    const failedAdd = async () => {
+        toast.error(`Failed Pinned Task`, {
+            position: "bottom-right"
+        });
+    }
+
+    const succesRemove = async () => {
+        toast.success(`Succes Un Pinned Task`, {
+            position: "bottom-right"
+        });
+    }
+
+    const failedRemove = async () => {
+        toast.error(`Failed Un Pinned Task`, {
+            position: "bottom-right"
+        });
+    }
 
     const apiPinnedTask = async () => {
         try {
@@ -43,11 +68,21 @@ const TodoListPinned = (prop) => {
     const handleClick = async () => {
         setLoading(true)
         if (isPin === false) {
-            await apiPinnedTask()
-            setIsPin(true)
+            const result = await apiPinnedTask()
+            if (result) {
+                setIsPin(true)
+                await succesAdd()
+            } else {
+                await failedAdd()
+            }
         } else {
-            await apiUnPinnedTask()
-            setIsPin(false)
+            const result = await apiUnPinnedTask()
+            if (result) {
+                setIsPin(false)
+                await succesRemove()
+            } else {
+                await failedRemove()
+            }
         }
         setLoading(false)
     }

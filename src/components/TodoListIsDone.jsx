@@ -8,25 +8,25 @@ const TodoListIsDone = (prop) => {
     const [loading, setLoading] = useState(false)
 
     const succesAdd = async () => {
-        toast.success(`Succes Pinned Task`, {
+        toast.success(`Succes Mark As Done Task`, {
             position: "bottom-right"
         });
     }
 
     const failedAdd = async () => {
-        toast.error(`Failed Pinned Task`, {
+        toast.error(`Failed Mark As Done Task`, {
             position: "bottom-right"
         });
     }
 
     const succesRemove = async () => {
-        toast.success(`Succes Un Pinned Task`, {
+        toast.success(`Succes Un Mark As Done Task`, {
             position: "bottom-right"
         });
     }
 
     const failedRemove = async () => {
-        toast.error(`Failed Un Pinned Task`, {
+        toast.error(`Failed Un Mark As Done Task`, {
             position: "bottom-right"
         });
     }

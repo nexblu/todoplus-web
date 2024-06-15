@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import TodoListBookmark from '../pages/TodoListBookmark';
 import { useMediaQuery } from 'react-responsive';
 import avatar from '../assets/default_avatar.webp'
+import TodoListPinned from '../pages/TodoListPinned';
 
 const SideBar = () => {
     const navigate = useNavigate()
@@ -87,6 +88,11 @@ const SideBar = () => {
         setPage('Account')
     }
 
+    const setPinned = () => {
+        setContent(<TodoListPinned />)
+        setPage('Pinned')
+    }
+
     const onLogout = () => {
         const accessToken = Cookies.get('access_token');
         const refreshToken = Cookies.get('refresh_token');
@@ -123,6 +129,9 @@ const SideBar = () => {
                         </span>
                         <span>
                             <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'Bookmark' ? null : setBookmark}>Bookmarks</h1>
+                        </span>
+                        <span>
+                            <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'Pinned' ? null : setPinned}>Task Pinned</h1>
                         </span>
                         <span>
                             <h1 className="cursor-pointer p-2 hover:bg-gray-700 rounded-md mt-1" onClick={page === 'AddTask' ? null : setAddTask}>Add Task</h1>
