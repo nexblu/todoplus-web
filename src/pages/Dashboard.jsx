@@ -1,20 +1,8 @@
 import SideBar from "../components/SideBar"
 import { Helmet } from "react-helmet";
 import icon from '../assets/icon.png'
-import { useEffect } from "react";
-import Cookies from 'js-cookie';
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (!accessToken) {
-            navigate('/login')
-        }
-    }, [navigate]);
-
     return (
         <>
             <Helmet>

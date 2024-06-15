@@ -52,6 +52,8 @@ const useAuth = () => {
 
       if (!accessToken || !refreshToken) {
         setAuth(false);
+        Cookies.remove('access_token');
+        Cookies.remove('refresh_token');
         return;
       }
 
