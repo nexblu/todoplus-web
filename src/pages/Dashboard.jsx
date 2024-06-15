@@ -1,6 +1,7 @@
 import SideBar from "../components/SideBar"
 import { Helmet } from "react-helmet";
 import icon from '../assets/icon.png'
+import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
     return (
@@ -25,6 +26,7 @@ const Dashboard = () => {
             <div className="flex h-screen">
                 <SideBar />
             </div>
+            <ToastContainer theme={'dark'} />
         </>
     )
 }

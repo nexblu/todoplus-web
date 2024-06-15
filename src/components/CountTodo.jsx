@@ -1,45 +1,43 @@
 import { useEffect } from "react"
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
 
 const CountTodo = (prop) => {
     let { length, setLength, isDone, setIsDone } = prop
 
     useEffect(() => {
-        const getTodo = async (token, username) => {
+        const getTodo = async () => {
             const headers = new Headers();
-            headers.append('Authorization', `Bearer ${token}`);
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/${username}`, {
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist`, {
                 method: 'GET',
                 headers: headers
             });
-            const json = await response.json();
-            setLength(json['result'].length);
+            const resp = await response.json();
+            if (resp.success) {
+                setLength(resp.data.length);
+            } else {
+                setLength(0);
+            }
         };
 
-        const getTodoIsDone = async (token, username) => {
+        const getTodoIsDone = async () => {
             const headers = new Headers();
-            headers.append('Authorization', `Bearer ${token}`);
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/completed/${username}`, {
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/is-done`, {
                 method: 'GET',
                 headers: headers
             });
-            const json = await response.json();
-            if (json['status_code'] === 200) {
-                setIsDone(json['result'].length);
+            const resp = await response.json();
+            if (resp.success) {
+                setIsDone(resp.data.length);
             } else {
                 setIsDone(0)
             }
         };
-
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            getTodo(accessToken, decodedToken.username);
-            getTodoIsDone(accessToken, decodedToken.username);
-        }
+        getTodo();
+        getTodoIsDone();
     }, [setLength, setIsDone]);
 
     return (

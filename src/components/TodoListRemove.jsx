@@ -1,86 +1,50 @@
 import { FaTrash } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 const TodoListRemove = (prop) => {
     let { todo, list, setList } = prop
 
-    const [user, setUser] = useState({})
+    const [loading, setLoading] = useState(false)
 
-    const [token, setToken] = useState('')
-
-    const [loading, setLoading] = useState()
-
-    useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            setUser({
-                username: decodedToken.username,
-                email: decodedToken.email,
-                password: decodedToken.password,
-                is_active: decodedToken.is_active
-            })
-            setToken(accessToken)
-        }
-    }, [setUser, setToken]);
-
-    const apiAddLog =  async (token, username, log) => {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`)
-        headers.append('Content-Type', 'application/json')
-        const data = {
-            username: username,
-            log: log
-        }
-        const response = await fetch('https://web-production-df03.up.railway.app/todoplus/v1/todolist/log', {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(
-                data
-            )
-        })
-        const resp = await response.json()
-        if (resp.status_code === 201) {
-            return true
-        } else {
-            return false
-        }
+    const successRemove = async () => {
+        toast.success(`Succes Remove Task`, {
+            position: "bottom-right"
+        });
     }
 
-    const todoDelete = async (id, username) => {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`);
-        headers.append('Content-Type', 'application/json');
-        const data = {
-            username: username,
-            id: id,
-        };
-        const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist`, {
-            method: 'DELETE',
-            headers: headers,
-            body: JSON.stringify(
-                data
-            )
+    const failedRemove = async () => {
+        toast.error(`Failed Remove Task`, {
+            position: "bottom-right"
         });
-        const resp = await response.json();
-        if (resp.status_code) {
-            return true
-        } else {
+    }
+
+    const todoDelete = async () => {
+        try {
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
+            headers.append('Content-Type', 'application/json');
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/${todo.task_id}`, {
+                method: 'DELETE',
+                headers: headers
+            });
+            const resp = await response.json();
+            return resp.success
+        } catch (error) {
             return false
         }
     }
 
     const handleClick = async () => {
         setLoading(true)
-        const result = await todoDelete(todo.id, user.username)
+        const result = await todoDelete()
         if (result) {
-            await apiAddLog(token, user.username, `success remove task '${todo.task}'`)
-            let newArray = list.filter(element => element.id !== todo.id);
-            setList(newArray)
+            let updatedTasks = list.filter(task => task.task_id !== todo.task_id);
+            setList(updatedTasks)
+            await successRemove()
         } else {
-            await apiAddLog(token, user.username, `failed remove task '${todo.task}'`)
+            await failedRemove()
         }
         setLoading(false)
     }

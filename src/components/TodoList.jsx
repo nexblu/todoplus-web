@@ -7,7 +7,6 @@ import { ThreeCircles } from 'react-loader-spinner'
 import TaskPagination from "./TaskPagination";
 import TodoListBookmark from "./TodoListBookmark";
 import TodoListPinned from "./TodoListPinned";
-import TaskPinned from "./TaskPinned";
 
 const TodoList = (prop) => {
     let { list, setList } = prop;
@@ -52,9 +51,9 @@ const TodoList = (prop) => {
                 method: 'GET',
                 headers: headers
             });
-            const json = await response.json();
-            if (json['status_code'] === 200) {
-                setList(json['result']);
+            const resp = await response.json();
+            if (resp.success) {
+                setList(resp.data);
                 setLoading(false);
             } else {
                 setLoading(false);
@@ -69,7 +68,6 @@ const TodoList = (prop) => {
 
     return (
         <>
-            <TaskPinned list={list} />
             {loading === true ? <ThreeCircles
                 visible={true}
                 height="100"
@@ -80,9 +78,9 @@ const TodoList = (prop) => {
                 wrapperClass="flex justify-center"
             /> : <ul className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
                 {currentTasks.map((todo) => (
-                    <li key={todo.id} className={`bg-[#68A4F1] flex items-center p-[5px] me-[4rem] ms-[4rem] mb-[15px] rounded-lg border ${todo.is_done ? 'border-lime-500' : 'border-red-600'}`}>
-                        <TodoListIsDone todo={todo} setList={setList} />
-                        <TodoListPinned todo={todo} setList={setList} />
+                    <li key={todo.task_id} className={`bg-[#68A4F1] flex items-center p-[5px] me-[4rem] ms-[4rem] mb-[15px] rounded-lg border ${todo.is_done ? 'border-lime-500' : 'border-red-600'}`}>
+                        <TodoListIsDone todo={todo} setList={setList} list={list} />
+                        <TodoListPinned todo={todo} />
                         <div className="flex justify-center flex-grow">
                             <p className={`${todo.is_done ? 'line-through' : ''} text-[#FFFFFF] text-center`}>
                                 {todo.task}

@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 
-
 const Add = () => {
     const style = {
         position: 'absolute',

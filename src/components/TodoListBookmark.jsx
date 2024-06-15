@@ -1,77 +1,65 @@
 import { FaBookmark } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
 
 const TodoListBookmark = (prop) => {
     let { todo } = prop
 
-    const [user, setUser] = useState({})
-
-    const [token, setToken] = useState('')
-
     const [loading, setLoading] = useState(false)
+    const [bookmark, setBookmark] = useState(todo.bookmark)
 
-    useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            setUser({
-                username: decodedToken.username,
-                email: decodedToken.email,
-                password: decodedToken.password,
-                is_active: decodedToken.is_active
-            })
-            setToken(accessToken)
-        }
-    }, [setUser, setToken]);
+    const succesAdd = async () => {
+        toast.success(`Succes Add Bookmark`, {
+            position: "bottom-right"
+        });
+    }
 
-    const apiAddLog =  async (token, username, log) => {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`)
-        headers.append('Content-Type', 'application/json')
-        const data = {
-            username: username,
-            log: log
-        }
-        const response = await fetch('https://web-production-df03.up.railway.app/todoplus/v1/todolist/log', {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(
-                data
-            )
-        })
-        const resp = await response.json()
-        if (resp.status_code === 201) {
-            return true
-        } else {
+    const failedAdd = async () => {
+        toast.error(`Failed Add Bookmark`, {
+            position: "bottom-right"
+        });
+    }
+
+    const succesRemove = async () => {
+        toast.success(`Succes Remove Bookmark`, {
+            position: "bottom-right"
+        });
+    }
+
+    const failedRemove = async () => {
+        toast.error(`Failed Remove Bookmark`, {
+            position: "bottom-right"
+        });
+    }
+
+    const apiAddBookmark = async () => {
+        try {
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
+            headers.append('Content-Type', 'application/json');
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/bookmark/${todo.task_id}`, {
+                method: 'POST',
+                headers: headers,
+            });
+            const resp = await response.json();
+            return resp.success
+        } catch (error) {
             return false
         }
     }
 
-    const apiBookmark = async (username, id) => {
+    const apiRemoveBookmark = async () => {
         try {
             const headers = new Headers();
-            headers.append('Authorization', `Bearer ${token}`);
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
             headers.append('Content-Type', 'application/json');
-            const data = {
-                username: username,
-                id: id
-            };
-            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/bookmark`, {
-                method: 'PUT',
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/bookmark/${todo.task_id}`, {
+                method: 'DELETE',
                 headers: headers,
-                body: JSON.stringify(
-                    data
-                )
             });
             const resp = await response.json();
-            if (resp['status_code'] === 201) {
-                return true
-            } else {
-                return false
-            }
+            return resp.success
         } catch (error) {
             return false
         }
@@ -79,11 +67,22 @@ const TodoListBookmark = (prop) => {
 
     const handleClick = async () => {
         setLoading(true)
-        const result = await apiBookmark(user.username, todo.id)
-        if (result) {
-            await apiAddLog(token, user.username, `success pinned task ${todo.id}`)
+        if (!bookmark) {
+            const result = await apiAddBookmark()
+            if (result) {
+                setBookmark(true)
+                await succesAdd()
+            } else {
+                await failedAdd()
+            }
         } else {
-            await apiAddLog(token, user.username, `failed pinned task ${todo.id}`)
+            const result = await apiRemoveBookmark()
+            if (result) {
+                setBookmark(false)
+                await succesRemove()
+            } else {
+                await failedRemove()
+            }
         }
         setLoading(false)
     }

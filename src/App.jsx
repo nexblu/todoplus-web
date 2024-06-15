@@ -37,7 +37,6 @@ const refreshTokenAPI = async () => {
       return { refreshed: false };
     }
   } catch (error) {
-    console.error('Failed to refresh token:', error);
     return { refreshed: false };
   }
 };
@@ -85,7 +84,7 @@ const PrivateRoute = (prop) => {
   const auth = useAuth();
 
   if (auth === null) {
-    return null; // Optionally, render a loading indicator
+    return null;
   }
 
   return auth ? element : <Navigate to="/" />;
@@ -95,7 +94,7 @@ const App = () => {
   const auth = useAuth();
 
   if (auth === null) {
-    return null; // Optionally, render a loading indicator
+    return null;
   }
 
   return (

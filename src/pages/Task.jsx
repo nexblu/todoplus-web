@@ -1,21 +1,10 @@
 import { Helmet } from "react-helmet";
 import icon from '../assets/icon.png'
-import { useEffect, useState } from "react";
-import Cookies from 'js-cookie';
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import TodoList from "../components/TodoList";
 
 const Task = () => {
     const [list, setList] = useState([])
-
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (!accessToken) {
-            navigate('/login')
-        }
-    }, [navigate]);
 
     return (
         <>

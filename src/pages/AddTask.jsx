@@ -2,8 +2,6 @@ import { Helmet } from "react-helmet";
 import icon from '../assets/icon.png'
 import { useState } from "react";
 import CountTodo from "../components/CountTodo";
-import { ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 import TodoListAdd from "../components/TodoListAdd";
 
 const AddTask = () => {
@@ -32,7 +30,6 @@ const AddTask = () => {
                     </div>
                 </section>
                 <TodoListAdd setLength={setLength} setIsDone={setIsDone} />
-                <ToastContainer theme={'dark'} />
             </div>
         </>
     )

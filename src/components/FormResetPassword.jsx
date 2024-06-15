@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 const FormResetPassword = () => {
     const [loading, setLoading] = useState(false)

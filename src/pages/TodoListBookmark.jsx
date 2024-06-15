@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { Helmet } from "react-helmet";
 import icon from '../assets/icon.png'
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
 import { ThreeCircles } from 'react-loader-spinner'
 import TaskPagination from "../components/TaskPagination";
 
@@ -41,28 +40,21 @@ const TodoListBookmark = () => {
 
     useEffect(() => {
         setLoading(true);
-        const getTodo = async (token, username) => {
+        const getTodo = async () => {
             const headers = new Headers();
-            headers.append('Authorization', `Bearer ${token}`);
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/bookmark/${username}`, {
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/bookmark`, {
                 method: 'GET',
                 headers: headers
             });
-            const json = await response.json();
-            if (json['status_code'] === 200) {
-                setList(json['result']);
-                setLoading(false);
-            } else {
-                setLoading(false);
+            const resp = await response.json();
+            if (resp.success) {
+                setList(resp.data);
             }
         };
-
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            getTodo(accessToken, decodedToken.username);
-        }
+        getTodo();
+        setLoading(false);
     }, [setList, setLoading]);
 
     return (

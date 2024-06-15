@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
 
 const TodoListAdd = (prop) => {
     let { setIsDone, setLength } = prop
@@ -10,24 +9,6 @@ const TodoListAdd = (prop) => {
     const [taskErrorMessage, setTaskErrorMessage] = useState('')
 
     const [loading, setLoading] = useState(false)
-
-    const [user, setUser] = useState({})
-
-    const [token, setToken] = useState('')
-
-    useEffect(() => {
-        const accessToken = Cookies.get('access_token');
-        if (accessToken) {
-            const decodedToken = jwtDecode(accessToken);
-            setUser({
-                username: decodedToken.username,
-                email: decodedToken.email,
-                password: decodedToken.password,
-                is_active: decodedToken.is_active
-            })
-            setToken(accessToken)
-        }
-    }, [setUser]);
 
     const clearForm = async () => {
         setTaskError(false)
@@ -47,73 +28,48 @@ const TodoListAdd = (prop) => {
         });
     }
 
-    const getTodoIsDone = async (token, username) => {
+    const getTodoIsDone = async () => {
         const headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`);
+        headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
         headers.append('Content-Type', 'application/json');
-        const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/completed/${username}`, {
+        const response = await fetch(`http://localhost:5000/todoplus/v1/todolist/is-done`, {
             method: 'GET',
             headers: headers
         });
-        const json = await response.json();
-        if (json.status_code === 200) {
-            setIsDone(json.result.length)
+        const resp = await response.json();
+        if (resp.status) {
+            setIsDone(resp.data.length)
         } else {
             setIsDone(0)
         }
     };
 
-    const getTodo = async (token, username) => {
+    const getTodo = async () => {
         const headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`);
+        headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
         headers.append('Content-Type', 'application/json');
-        const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist/${username}`, {
+        const response = await fetch(`http://localhost:5000/todoplus/v1/todolist`, {
             method: 'GET',
             headers: headers
         });
-        const json = await response.json();
-        if (json.status_code === 200) {
-            setLength(json.result.length)
+        const resp = await response.json();
+        if (resp.success) {
+            setLength(resp.data.length)
         } else {
             setLength(0)
         }
     };
 
-    const apiAddLog = async (token, username, log) => {
-        const headers = new Headers();
-        headers.append('Authorization', `Bearer ${token}`)
-        headers.append('Content-Type', 'application/json')
-        const data = {
-            username: username,
-            log: log
-        }
-        const response = await fetch('https://web-production-df03.up.railway.app/todoplus/v1/todolist/log', {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(
-                data
-            )
-        })
-        const resp = await response.json()
-        if (resp.status_code === 201) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    const apiAddTask = async (task, username) => {
+    const apiAddTask = async () => {
         try {
             const headers = new Headers();
-            headers.append('Authorization', `Bearer ${token}`);
+            headers.append('Authorization', `Bearer ${Cookies.get('access_token')}`);
             headers.append('Content-Type', 'application/json');
             const data = {
                 task: task,
-                username: username,
-                tags: [],
-                date: null
+                tags: ["programming"],
             };
-            const response = await fetch(`https://web-production-795c.up.railway.app/todoplus/v1/todolist`, {
+            const response = await fetch(`http://localhost:5000/todoplus/v1/todolist`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(
@@ -121,11 +77,7 @@ const TodoListAdd = (prop) => {
                 )
             });
             const resp = await response.json();
-            if (resp['status_code'] === 201) {
-                return true
-            } else {
-                return false
-            }
+            return resp.success
         } catch (error) {
             return false
         }
@@ -134,12 +86,11 @@ const TodoListAdd = (prop) => {
     const onAddTask = async (e) => {
         e.preventDefault();
         setLoading(true)
-        const result = await apiAddTask(task, user.username)
+        const result = await apiAddTask()
         if (result) {
             await clearForm()
-            await apiAddLog(token, user.username, `create task '${task}'`)
-            await getTodoIsDone(token, user.username)
-            await getTodo(token, user.username)
+            await getTodoIsDone()
+            await getTodo()
             await succesAdd()
         } else {
             await failedAdd()
